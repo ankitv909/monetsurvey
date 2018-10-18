@@ -81,15 +81,34 @@ const styles = theme => ({
 });
 
 class Signup extends Component {
-    state = {
-        value: 0,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 0,
+            formData: []
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
     handleChange = (event, value) => {
         this.setState({ value });
     };
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            formData: {[name]: value}
+        });
+    }
+    handleSubmit(event) {
+        console.log(this.state);
+        event.preventDefault();
+    }
     render() {
         const { classes } = this.props;
-        const { value } = this.state;
         return (
             <div className="signup">
                 <Grid container
@@ -99,6 +118,7 @@ class Signup extends Component {
                 >
                     <Grid item xs={8} sm={6} md={5} lg={5} xl={3}>
                         <Card className={classes.card}>
+                            <form onSubmit={this.handleSubmit}>
                             <Grid container
                                   direction="row"
                                   justify="center"
@@ -120,7 +140,7 @@ class Signup extends Component {
                                 <Paper className={classes.root}>
                                     <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
                                         <Tabs
-                                            value={value}
+                                            value={this.state.value}
                                             onChange={this.handleChange}
                                             indicatorColor="primary"
                                             textColor="primary"
@@ -142,52 +162,70 @@ class Signup extends Component {
                                 >
                                     <FormControl className={classes.margin}>
                                         <TextField
+                                            fullWidth
                                             id="filled-name-input"
                                             label="Company name"
                                             className={classes.textField}
                                             type="name"
                                             autoComplete="current-name"
                                             margin="normal"
+                                            name="company_name"
+                                            onChange={this.handleInputChange}
                                         />
                                         <TextField
+                                            fullWidth
                                             id="filled-adminname-input"
                                             label="Company admin name"
                                             className={classes.textField}
                                             type="name"
                                             autoComplete="current-name"
                                             margin="normal"
+                                            name="company_admin_name"
+                                            onChange={this.handleInputChange}
                                         />
                                         <TextField
+                                            fullWidth
                                             id="filled-email-input"
                                             label="Company email"
                                             className={classes.textField}
                                             type="email"
                                             autoComplete="current-email"
                                             margin="normal"
+                                            name="company_email"
+                                            onChange={this.handleInputChange}
                                         />
                                         <TextField
+                                            fullWidth
                                             id="filled-password-input"
                                             label="Password"
                                             className={classes.textField}
                                             type="password"
                                             autoComplete="current-password"
                                             margin="normal"
+                                            name="company_password"
+                                            onChange={this.handleInputChange}
                                         />
                                         <TextField
+                                            fullWidth
                                             id="filled-confirmpassword-input"
                                             label="Confirm password"
                                             className={classes.textField}
                                             type="password"
                                             autoComplete="current-password"
                                             margin="normal"
+                                            name="company_confirm_password"
+                                            onChange={this.handleInputChange}
                                         />
                                         <TextField
+                                            fullWidth
                                             id="filled-companyadrs-input"
                                             label="Company address"
                                             className={classes.textField}
                                             type="address"
                                             autoComplete="current-address"
                                             margin="normal"
+                                            name="company_address"
+                                            onChange={this.handleInputChange}
                                         />
                                         <Grid
                                             container
@@ -200,22 +238,28 @@ class Signup extends Component {
                                                   justify="flex-start"
                                                   alignItems="center">
                                                 <TextField
+                                                    fullWidth
                                                     id="filled-companycountry-input"
                                                     label="Company Country"
                                                     className={classes.textField}
                                                     type="address"
                                                     autoComplete="current-address"
                                                     margin="normal"
+                                                    name="company_country"
+                                                    onChange={this.handleInputChange}
                                                 />
                                             </Grid>
                                             <Grid item lg={5}>
                                                 <TextField
+                                                    fullWidth
                                                     id="filled-zipcode-input"
                                                     label="ZIP code"
                                                     className={classes.textField}
                                                     type="address"
                                                     autoComplete="current-address"
                                                     margin="normal"
+                                                    name="company_zipcode"
+                                                    onChange={this.handleInputChange}
                                                 />
                                             </Grid>
 
@@ -231,11 +275,12 @@ class Signup extends Component {
                                 alignItems="center"
                                 item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
                                 <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
-                                    <Button variant="contained"  className={classes.button}>
+                                    <Button type="submit" variant="contained"  className={classes.button}>
                                         Sign Up
                                     </Button>
                                 </Grid>
                             </Grid>
+                        </form>
                         </Card>
                     </Grid>
                 </Grid>
