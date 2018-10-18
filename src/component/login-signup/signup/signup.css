@@ -1,0 +1,36 @@
+.signup {
+    text-align: center;
+    padding-top: 4rem;
+}
+
+.signup-logo {
+    animation: signup-logo-spin infinite 20s linear;
+    height: 40vmin;
+}
+
+.signup-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.signup-link {
+    color: #61dafb;
+}
+
+@keyframes signup-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.signup-shadow{
+    boxshadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 4px 1px -3px rgba(0, 0, 0, 0.12);
+}

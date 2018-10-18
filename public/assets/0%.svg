@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.2 195.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #bbb;
+        stroke-miterlimit: 10;
+        stroke-width: 30px;
+      }
+
+      .cls-2 {
+        fill: #878787;
+        font-size: 42px;
+        font-family: SegoeUI-Bold, Segoe UI;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <g id="Group_241" data-name="Group 241" transform="translate(-145 -609)">
+    <circle id="Ellipse_128" data-name="Ellipse 128" class="cls-1" cx="82.6" cy="82.6" r="82.6" transform="translate(160 624)"/>
+    <text id="_0_" data-name="0%" class="cls-2" transform="translate(223 722)"><tspan x="0" y="0">0%</tspan></text>
+  </g>
+</svg>

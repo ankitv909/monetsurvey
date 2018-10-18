@@ -1,0 +1,55 @@
+.addcontent {
+    text-align: center;
+    padding-top: 6rem;
+}
+.color{
+    color: rgba(0, 0, 0, 0.54) !important;
+    fontweight:'500' !important;
+}
+
+.addcontent-logo {
+    animation: addcontent-logo-spin infinite 20s linear;
+    height: 40vmin;
+}
+
+.addcontent-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.addcontent-link {
+    color: #61dafb;
+}
+
+@keyframes addcontent-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+/*
+.MuiInput-underline-232:hover:not(.MuiInput-disabled-231):not(.MuiInput-focused-230):not(.MuiInput-error-233):before{
+    border-bottom: 1px solid gray !important;
+}
+.MuiInputBase-input-251{
+    padding: 6px 16px 7px !important;
+}
+*/
+.MuiInput-underline-241:after{
+    border-bottom: 0px solid #303f9f !important;
+}
+.MuiInput-underline-241:before{
+    border-bottom: 0px solid #303f9f !important;
+}
+.minwidth{
+    min-width: 50px !important;
+    padding: 8px 10px !important;
+}

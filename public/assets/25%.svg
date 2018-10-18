@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.4 195.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #bbb;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-miterlimit: 10;
+        stroke-width: 30px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #4fb49e;
+        stroke-linecap: round;
+      }
+
+      .cls-3 {
+        fill: #878787;
+        font-size: 45px;
+        font-family: CircularStd-Book, Circular Std Book;
+      }
+    </style>
+  </defs>
+  <g id="Group_240" data-name="Group 240" transform="translate(-146.5 -613)">
+    <circle id="Ellipse_128" data-name="Ellipse 128" class="cls-1" cx="82.6" cy="82.6" r="82.6" transform="translate(161.5 628)"/>
+    <path id="Path_167" data-name="Path 167" class="cls-2" d="M103.1,22.5h2.2a82.624,82.624,0,0,1,82.6,82.6,70.263,70.263,0,0,1-.4,8" transform="translate(139 605.5)"/>
+    <text id="_25_" data-name="25%" class="cls-3" transform="translate(210.5 728)"><tspan x="0" y="0">25%</tspan></text>
+  </g>
+</svg>
