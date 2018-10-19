@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import './signup.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import Avatar from "@material-ui/core/Avatar/Avatar";
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from "@material-ui/core/Typography/Typography";
 import FormControl from '@material-ui/core/FormControl';
-import TextField from "@material-ui/core/TextField/TextField";
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
 import Button from "@material-ui/core/Button/Button";
-import {Link} from "react-router-dom";
 
 
 function TabContainer({ children, dir }) {
@@ -83,207 +79,146 @@ const styles = theme => ({
 class Signup extends Component {
     constructor(props) {
         super(props);
+        document.title = 'Monet | Sign up';
         this.state = {
-            value: 0,
-            formData: []
+            formData: {
+                company_name : {value: '', isValid: false},
+                company_admin_name : {value: '', isValid: false},
+                company_email : {value: '', isValid: false},
+                company_password : {value: '', isValid: false},
+                company_confirm_password : {value: '', isValid: false},
+                company_address : {value: '', isValid: false},
+                company_country : {value: '', isValid: false},
+                company_zipcode : {value: '', isValid: false}
+            }
         };
-        this.handleChange = this.handleChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
     handleInputChange(event) {
+        event.persist();
+        console.log(event);
         const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const isValid = Signup.handleValidation(target.name, value);
+        let {formData} = this.state;
+        formData[name] = {value, isValid};
         this.setState({
-            formData: {[name]: value}
+            formData
         });
     }
     handleSubmit(event) {
         console.log(this.state);
         event.preventDefault();
     }
+    static handleValidation(type, value) {
+        if (type === 'company_name' || type === 'company_admin_name' || type === 'company_address' || type === 'company_country') {
+            return value.length > 3 && !!value.match(/^[a-zA-Z ]*$/);
+        } else if (type === 'company_email') {
+            return !!value.match(/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,3}$/);
+        } else if (type === 'company_password' || type === 'company_confirm_password') {
+            return !!value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&'])[^ ]{8,}$/);
+        } else if (type === 'company_zipcode') {
+            return (value.length >= 6 && !!value.match(/^[0-9]*$/));
+        }
+    }
     render() {
         const { classes } = this.props;
+        const { formData } = this.state;
+        let isEnabled = false;
+        for (let key in formData) {
+            isEnabled = formData[key].isValid;
+        }
         return (
             <div className="signup">
-                <Grid container
-                      direction="row"
-                      justify="center"
-                      alignItems="center"
-                >
-                    <Grid item xs={8} sm={6} md={5} lg={5} xl={3}>
-                        <Card className={classes.card}>
-                            <form onSubmit={this.handleSubmit}>
-                            <Grid container
-                                  direction="row"
-                                  justify="center"
-                                  alignItems="center"
-                            >
-                                <div className={classes.positionAbsolute}>
-                                    <Avatar
-                                        alt="Adelle Charles"
-                                        src="/assets/login-signup.svg"
-                                        className={ classes.bigAvatar}
-                                    />
-                                </div>
-                            </Grid>
-                            <Grid container
-                                  direction="row"
-                                  justify="center"
-                                  alignItems="center"
-                                  item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                                <Paper className={classes.root}>
-                                    <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
-                                        <Tabs
-                                            value={this.state.value}
-                                            onChange={this.handleChange}
-                                            indicatorColor="primary"
-                                            textColor="primary"
-                                            fullWidth
-                                        >
-                                            <Tab label="Login" component={Link} to="/login"/>
-                                            <Tab label="Sign Up" component={Link} to="/signup" />
-                                        </Tabs>
-                                    </Grid>
-                                </Paper>
-                            </Grid>
+                <title>Signup</title>
+                <form onSubmit={this.handleSubmit}>
+                    <div className={classes.paddingTop}>
+                        <Grid
+                            container
+                            direction="column"
+                            justify="center"
+                            alignItems="center"
+                        >
+                            <div className={classes.margin}>
+                                <FormControl className={classes.formControl} error={!formData.company_name.isValid} aria-describedby="company-name-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-name">Company Name</InputLabel>
+                                    <Input id="company-name" name="company_name" onChange={this.handleInputChange}/>
+                                    <FormHelperText id="company-name-error-text">Error</FormHelperText>
+                                </FormControl>
 
-                            <div className={classes.paddingTop}>
+                                <FormControl className={classes.formControl} error={!formData.company_admin_name.isValid} aria-describedby="company-admin-name-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-admin-name">Company admin name</InputLabel>
+                                    <Input id="company-admin-name" name="company_admin_name" onChange={this.handleInputChange} />
+                                    <FormHelperText id="company-admin-name-error-text">Error</FormHelperText>
+                                </FormControl>
+
+                                <FormControl className={classes.formControl} error={!formData.company_email.isValid} aria-describedby="company-email-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-email">Company email</InputLabel>
+                                    <Input id="company-email" name="company_email" onChange={this.handleInputChange} />
+                                    <FormHelperText id="company-email-error-text">Error</FormHelperText>
+                                </FormControl>
+
+                                <FormControl className={classes.formControl} error={!formData.company_password.isValid} aria-describedby="company-password-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-password">Company password</InputLabel>
+                                    <Input id="company-password" name="company_password" onChange={this.handleInputChange} />
+                                    <FormHelperText id="company-password-error-text">Error</FormHelperText>
+                                </FormControl>
+
+                                <FormControl className={classes.formControl} error={!formData.company_confirm_password.isValid} aria-describedby="company-confirm-password-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-confirm-password">Company confirm password</InputLabel>
+                                    <Input id="company-confirm-password" name="company_confirm_password" onChange={this.handleInputChange} />
+                                    <FormHelperText id="company-confirm-password-error-text">Error</FormHelperText>
+                                </FormControl>
+
+                                <FormControl className={classes.formControl} error={!formData.company_address.isValid} aria-describedby="company-address-error-text" fullWidth>
+                                    <InputLabel htmlFor="company-address">Company address</InputLabel>
+                                    <Input id="company-address" name="company_address" onChange={this.handleInputChange} />
+                                    <FormHelperText id="company-address-error-text">Error</FormHelperText>
+                                </FormControl>
                                 <Grid
                                     container
-                                    direction="column"
-                                    justify="center"
+                                    direction="row"
+                                    justify="flex-start"
                                     alignItems="center"
                                 >
-                                    <FormControl className={classes.margin}>
-                                        <TextField
-                                            fullWidth
-                                            id="filled-name-input"
-                                            label="Company name"
-                                            className={classes.textField}
-                                            type="name"
-                                            autoComplete="current-name"
-                                            margin="normal"
-                                            name="company_name"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <TextField
-                                            fullWidth
-                                            id="filled-adminname-input"
-                                            label="Company admin name"
-                                            className={classes.textField}
-                                            type="name"
-                                            autoComplete="current-name"
-                                            margin="normal"
-                                            name="company_admin_name"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <TextField
-                                            fullWidth
-                                            id="filled-email-input"
-                                            label="Company email"
-                                            className={classes.textField}
-                                            type="email"
-                                            autoComplete="current-email"
-                                            margin="normal"
-                                            name="company_email"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <TextField
-                                            fullWidth
-                                            id="filled-password-input"
-                                            label="Password"
-                                            className={classes.textField}
-                                            type="password"
-                                            autoComplete="current-password"
-                                            margin="normal"
-                                            name="company_password"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <TextField
-                                            fullWidth
-                                            id="filled-confirmpassword-input"
-                                            label="Confirm password"
-                                            className={classes.textField}
-                                            type="password"
-                                            autoComplete="current-password"
-                                            margin="normal"
-                                            name="company_confirm_password"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <TextField
-                                            fullWidth
-                                            id="filled-companyadrs-input"
-                                            label="Company address"
-                                            className={classes.textField}
-                                            type="address"
-                                            autoComplete="current-address"
-                                            margin="normal"
-                                            name="company_address"
-                                            onChange={this.handleInputChange}
-                                        />
-                                        <Grid
-                                            container
-                                            direction="row"
-                                            justify="flex-start"
-                                            alignItems="center"
-                                        >
-                                            <Grid item lg={7} container
-                                                  direction="row"
-                                                  justify="flex-start"
-                                                  alignItems="center">
-                                                <TextField
-                                                    fullWidth
-                                                    id="filled-companycountry-input"
-                                                    label="Company Country"
-                                                    className={classes.textField}
-                                                    type="address"
-                                                    autoComplete="current-address"
-                                                    margin="normal"
-                                                    name="company_country"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                            </Grid>
-                                            <Grid item lg={5}>
-                                                <TextField
-                                                    fullWidth
-                                                    id="filled-zipcode-input"
-                                                    label="ZIP code"
-                                                    className={classes.textField}
-                                                    type="address"
-                                                    autoComplete="current-address"
-                                                    margin="normal"
-                                                    name="company_zipcode"
-                                                    onChange={this.handleInputChange}
-                                                />
-                                            </Grid>
+                                    <Grid item lg={6} container
+                                          direction="row"
+                                          justify="flex-start"
+                                          alignItems="center">
+                                        <FormControl className={classes.formControl} error={!formData.company_country.isValid} aria-describedby="company-country-error-text" fullWidth>
+                                            <InputLabel htmlFor="company-country">Company country</InputLabel>
+                                            <Input id="company-country" name="company_country" onChange={this.handleInputChange} />
+                                            <FormHelperText id="company-country-error-text">Error</FormHelperText>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item lg={1}/>
+                                    <Grid item lg={5}>
+                                        <FormControl className={classes.formControl} error={!formData.company_zipcode.isValid} aria-describedby="company-zipcode-error-text" fullWidth>
+                                            <InputLabel htmlFor="company-zipcode">Company country</InputLabel>
+                                            <Input id="company-zipcode" name="company_zipcode" onChange={this.handleInputChange} />
+                                            <FormHelperText id="company-zipcode-error-text">Error</FormHelperText>
+                                        </FormControl>
+                                    </Grid>
 
-                                        </Grid>
-                                    </FormControl>
                                 </Grid>
                             </div>
-
-                            <Grid
-                                container
-                                direction="row"
-                                justify="flex-end"
-                                alignItems="center"
-                                item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                                <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
-                                    <Button type="submit" variant="contained"  className={classes.button}>
-                                        Sign Up
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </form>
-                        </Card>
+                        </Grid>
+                    </div>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                        item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
+                        <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
+                            <Button type="submit" variant="contained"  className={classes.button} style={{visibility: isEnabled ? 'visible' : 'hidden'}}>
+                                Sign Up
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </form>
 
             </div>
         );
