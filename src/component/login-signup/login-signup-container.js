@@ -60,7 +60,6 @@ class LoginSignupContainer extends Component {
         this.state = {
             value: 0,
         };
-        console.log('in constructor', this.props.location.pathname);
         switch (this.props.location.pathname) {
             case '/login':
                 this.state = {value: 0};
@@ -87,7 +86,7 @@ class LoginSignupContainer extends Component {
                       justify="center"
                       alignItems="center"
                 >
-                    <Grid item xs={8} sm={6} md={5} lg={5} xl={3} style={{marginTop: 100}}>
+                    <Grid item xs={8} sm={6} md={5} lg={5} xl={4} style={{marginTop: 100}}>
                         <Card className={classes.card}>
                             <Grid container
                                   direction="row"
@@ -98,7 +97,7 @@ class LoginSignupContainer extends Component {
                                     <Avatar
                                         alt="login-signup"
                                         src="/assets/login-signup.svg"
-                                        className={ classes.bigAvatar}
+                                        className={ classes.bigAvatar }
                                     />
                                 </div>
                             </Grid>
