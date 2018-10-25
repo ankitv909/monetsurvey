@@ -38,9 +38,26 @@ const styles = theme => ({
 });
 
 class Tabbar extends Component {
-    state = {
-        value: 0,
-    };
+    constructor(props) {
+        super(props);
+        document.title = 'Tabbar';
+        this.state = {
+            value: 0,
+        };
+       /* console.log('in tab', this.props.location.pathname);*/
+      /*  switch (this.props.location.pathname) {
+            case '/corporate':
+                this.state = {value: 0};
+                break;
+            case '/signup':
+                this.state = {value: 1};
+                break;
+            default:
+                this.state = {value: 0};
+                break;
+        }*/
+        this.handleChange = this.handleChange.bind(this);
+    }
 
     handleChange = (event, value) => {
         this.setState({ value });
@@ -79,7 +96,10 @@ class Tabbar extends Component {
                         {value === 3 && <TabContainer>pre</TabContainer>}
                         {value === 4 && <TabContainer>post</TabContainer>}
                         {value === 5 && <TabContainer>review</TabContainer>}*/}
+                        {/*<Route path={`${this.props.match.path}login`} component={Login} />*/}
+                        {/*<Route path={`${this.props.match.path}signup`} component={Signup} />*/}
                     </Grid>
+                    {/*{`${this.props.match.path}corporate`}*/}
                 </Grid>
             </div>
         );

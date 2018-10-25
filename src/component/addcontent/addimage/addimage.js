@@ -81,6 +81,15 @@ const styles = theme => ({
         color:'#ffff',
         textTransform:'none',
     },
+    cssUnderline: {
+        '&:after': {
+            borderBottomColor: "#ffff !important",
+        },
+        '&:before': {
+            borderBottomColor: "#ffff !important",
+        }
+    },
+
 });
 
 
@@ -123,6 +132,7 @@ class Addimage extends Component {
                                             classes={{
                                                 root: classes.bootstrapRoot,
                                                 input: classes.bootstrapInput,
+                                                underline: classes.cssUnderline,
                                             }}
                                         />
                                     </Grid>

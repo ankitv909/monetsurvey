@@ -1,14 +1,14 @@
-.customizeaudience {
+.audiencerange {
     text-align: center;
-    margin-top: 2rem;
+    padding-top: 2rem;
 }
 
-.customizeaudience-logo {
-    animation: customizeaudience-logo-spin infinite 20s linear;
+.audiencerange-logo {
+    animation: audiencerange-logo-spin infinite 20s linear;
     height: 40vmin;
 }
 
-.customizeaudience-header {
+.audiencerange-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
@@ -19,11 +19,11 @@
     color: white;
 }
 
-.customizeaudience-link {
+.audiencerange-link {
     color: #61dafb;
 }
 
-@keyframes customizeaudience-logo-spin {
+@keyframes audiencerange-logo-spin {
     from {
         transform: rotate(0deg);
     }
@@ -31,3 +31,9 @@
         transform: rotate(360deg);
     }
 }
+/*
+span{
+    color: rgba(0, 0, 0, 0.54) !important;
+}
+*/
+

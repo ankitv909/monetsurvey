@@ -103,12 +103,21 @@ const styles = theme => ({
         padding: '6px 40px',
         color:'#ffff',
         textTransform:'none',
+        marginTop:'1rem'
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: '100%',
         color:'rgba(176, 171, 171, 0.87)'
+    },
+    cssUnderline: {
+        '&:after': {
+            borderBottomColor: "#ffff !important",
+        },
+        '&:before': {
+            borderBottomColor: "#ffff !important",
+        }
     },
 });
 
@@ -159,6 +168,7 @@ class Addtext extends Component {
                                             classes={{
                                                 root: classes.bootstrapRoot,
                                                 input: classes.bootstrapInput,
+                                                underline: classes.cssUnderline,
                                             }}
                                         />
                                         </form>
@@ -199,7 +209,7 @@ class Addtext extends Component {
                                                     'type':'text',
                                                 }}
                                                 classes={{
-
+                                                    underline: classes.cssUnderline,
                                                 }}
                                             />
                                         </form>

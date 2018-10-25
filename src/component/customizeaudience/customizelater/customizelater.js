@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './customizeaudience.css';
+import './customizelater.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,9 +15,6 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button/Button";
 import TextField from "@material-ui/core/TextField/TextField";
-import {Link} from "react-router-dom";
-
-
 
 const drawerWidth = 300;
 
@@ -112,21 +109,34 @@ const styles = theme => ({
         textTransform:'none',
     },
     skipbutton:{
-        margin: theme.spacing.unit,
-        background: '#ffff',
-        borderRadius: '30px',
+        color: 'rgb(135, 135, 135)',
+        width: 'auto',
+        height: 'auto',
+        margin: '8px',
         padding: '6px 40px',
-        color:'rgb(135, 135, 135)',
-        textTransform:'none',
+        minwidth: '48px',
+        fontSize: '0.7rem',
         boxShadow: '0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 4px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 2px 0px rgba(0, 0, 0, 0.12)',
+        borderRadius: '30px',
+        textTransform: 'none',
+        backgroundColor: '#ffff !important',
+    },
+    addmore: {
+        margin: '0',
+        background: 'linear-gradient(270deg,#5C95E4 20%,#1838D6)',
+        borderRadius: '30px',
+        padding: '6px 30px',
+        color:'#ffff',
+        textTransform:'none',
     },
     textField: {
+        /*marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,*/
         width: '100%',
     },
-
 });
 
-class Customizeaudience extends Component {
+class Customizelater extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -152,7 +162,7 @@ class Customizeaudience extends Component {
                             <ListItem >
                                 <ListItemText  primary="Quota" />
                                 <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-                                    <img src="/assets/note-interface-symbol.svg" alt="check" />
+                                    <img src="/assets/success.svg" alt="check" />
                                 </Grid>
                             </ListItem>
                             <li>
@@ -161,7 +171,7 @@ class Customizeaudience extends Component {
                             <ListItem >
                                 <ListItemText primary="Customize Range"/>
                                 <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-                                    <img src="/assets/info.svg" alt="check" />
+                                    <img src="/assets/success.svg" alt="check" />
                                 </Grid>
                             </ListItem>
                             <li>
@@ -170,7 +180,7 @@ class Customizeaudience extends Component {
                             <ListItem >
                                 <ListItemText primary="Customize Later" />
                                 <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-                                    <img src="/assets/info.svg" alt="check" />
+                                    <img src="/assets/note-interface-symbol.svg" alt="check" />
                                 </Grid>
                             </ListItem>
                             <li>
@@ -196,6 +206,18 @@ class Customizeaudience extends Component {
                             </li>
                         </List>
                     </Paper>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                        item xs={12} md={12} sm={12} lg={12} xl={12} >
+                        <Grid item xs={5} md={6} sm={8} lg={8} xl={12} className={classes.paddingTop1}>
+                            <Button type="submit" variant="contained"  className={classes.addmore}>
+                                Add more
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         );
@@ -234,7 +256,7 @@ class Customizeaudience extends Component {
                             </Drawer>
                         </Hidden>
                         <Grid item xs={12} sm={12} md={12} lg={9} xl={12} className={classes.content}>
-                            <Paper  className={classes.content1}>
+                            <Paper className={classes.content1} >
                                 {/*  <div className={classes.toolbar} />*/}
                                 <IconButton
                                     color="inherit"
@@ -245,27 +267,30 @@ class Customizeaudience extends Component {
                                     <MenuIcon />
                                 </IconButton>
                                 <Typography className={classes.textTransform} variant="button" gutterBottom>
-                                    Add Quota
+                                    Tell us for further customization
                                 </Typography>
 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                                       container
                                       direction="row"
                                       justify="flex-start"
-                                      alignItems="flex-start">
+                                      alignItems="flex-start" className={classes.paddingTop1}>
                                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <Paper className={classes.shadownone}>
-                                        <form className={classes.container} noValidate autoComplete="off">
-                                            <TextField
-                                                id="standard-password-input"
-                                                label="Quota Name"
-                                                className={classes.textField}
-                                                type="text"
-                                                autoComplete="current-password"
-                                                margin="normal"
-                                            />
-                                        </form>
-                                    </Paper>
+                                        <Paper className={classes.shadownone}>
+                                            <form  noValidate autoComplete="on">
+                                                <TextField
+                                                    id="standard-textarea"
+                                                    label="Your message"
+                                                    placeholder="Your message"
+                                                    multiline
+                                                    className={classes.textField}
+                                                    margin="normal"
+                                                />
+                                            </form>
+                                            <Typography className={classes.textTransform} variant="button" gutterBottom>
+                                                We will contact you within 24 hours
+                                            </Typography>
+                                        </Paper>
                                     </Grid>
                                 </Grid>
                             </Paper>
@@ -278,7 +303,7 @@ class Customizeaudience extends Component {
                                 <Button type="submit" variant="contained"  className={classes.skipbutton}>
                                     Skip
                                 </Button>
-                                <Button type="submit" variant="contained" component={Link} to="/customizerange" className={classes.button1}>
+                                <Button type="submit" variant="contained" className={classes.button1}>
                                     Next
                                 </Button>
                             </Grid>
@@ -289,9 +314,9 @@ class Customizeaudience extends Component {
         </div>;
     }
 }
-Customizeaudience.propTypes = {
+Customizelater.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Customizeaudience);
+export default withStyles(styles, { withTheme: true })(Customizelater);

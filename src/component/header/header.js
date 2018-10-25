@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
 import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
+import {Link} from "react-router-dom";
 
 
 
@@ -124,8 +125,8 @@ class Header extends Component {
                                                         label={auth ? 'Logout' : 'Login'}
                                                     />
                                                 </FormGroup>
-                                                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                                                <MenuItem component={Link} to="/login" onClick={this.handleClose}>Login</MenuItem>
+                                                <MenuItem component={Link} to="/signup" onClick={this.handleClose}>Signup</MenuItem>
                                             </Menu>
                                         </div>
                                     )}

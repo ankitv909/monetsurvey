@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button/Button";
+
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -63,6 +64,18 @@ const styles = theme => ({
         backgroundColor:'transparent',
         boxShadow: 'none',
     },
+    bootstrapInput: {
+        fontSize: 10,
+        borderBottom: '1px solid #ced4da00 ',
+    },
+    cssUnderline: {
+        '&:after': {
+            borderBottomColor: "#ffff !important",
+        },
+        '&:before': {
+            borderBottomColor: "#ffff !important",
+        }
+    },
 });
 
 
@@ -105,6 +118,7 @@ class Addcontent extends Component {
                                             classes={{
                                                 root: classes.bootstrapRoot,
                                                 input: classes.bootstrapInput,
+                                                underline: classes.cssUnderline,
                                             }}
                                         />
                                     </Grid>

@@ -87,7 +87,7 @@ class LoginSignupContainer extends Component {
                       justify="center"
                       alignItems="center"
                 >
-                    <Grid item xs={8} sm={6} md={5} lg={5} xl={3} style={{marginTop: 100}}>
+                    <Grid item xs={8} sm={6} md={5} lg={5} xl={3} style={{marginTop: 100,marginBottom:'4rem'}}>
                         <Card className={classes.card}>
                             <Grid container
                                   direction="row"
@@ -116,7 +116,7 @@ class LoginSignupContainer extends Component {
                                     textColor="primary"
                                     fullWidth
                                 >
-                                    <Tab className="login-shadow" label="Login" component={Link} to="/login"/>
+                                    <Tab className="login-shadow" label="Login" component={Link} to="/login" />
                                     <Tab label="Sign Up" component={Link} to="/signup" />
                                 </Tabs>
                                 </Grid>

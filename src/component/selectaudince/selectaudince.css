@@ -1,6 +1,6 @@
 .selectaudince {
     text-align: center;
-    padding-top: 4rem;
+    padding-top: 2rem;
 }
 
 .selectaudince-logo {
@@ -31,3 +31,8 @@
         transform: rotate(360deg);
     }
 }
+/*
+span{
+    color: rgba(0, 0, 0, 0.54) !important;
+}
+*/
