@@ -98,7 +98,7 @@ class LoginSignupContainer extends Component {
                                     <Avatar
                                         alt="login-signup"
                                         src="/assets/login-signup.svg"
-                                        className={ classes.bigAvatar}
+                                        className={ classes.bigAvatar }
                                     />
                                 </div>
                             </Grid>

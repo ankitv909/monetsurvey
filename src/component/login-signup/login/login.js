@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import Typography from "@material-ui/core/Typography/Typography";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import TextField from "@material-ui/core/TextField/TextField";
 import Button from "@material-ui/core/Button/Button";
 
@@ -89,26 +88,37 @@ class Login extends Component {
         this.state = {
             value: 0,
             formData: {
-                company_name : {value: '', isValid: false},
-                company_admin_name : {value: '', isValid: false},
-                company_email : {value: '', isValid: false},
-                company_password : {value: '', isValid: false},
-                company_confirm_password : {value: '', isValid: false},
-                company_address : {value: '', isValid: false},
-                company_country : {value: '', isValid: false},
-                company_zipcode : {value: '', isValid: false}
+                company_email : {value: ''},
+                company_password : {value: ''}
             }
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange = (event, value) => {
         this.setState({ value });
     };
+    handleInputChange(event) {
+        const target = event.target;
+        const name = target.name;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        let {formData} = this.state;
+        formData[name] = {value};
+        this.setState({
+            formData
+        });
+    }
+    handleSubmit(event) {
+        console.log(this.state);
+        event.preventDefault();
+    }
     render() {
         const { classes } = this.props;
         return (
             <div className="login">
                 <title>Login</title>
+                <form onSubmit={this.handleSubmit}>
                 <div className={classes.paddingTop}>
                     <Grid
                         container
@@ -116,8 +126,9 @@ class Login extends Component {
                         justify="center"
                         alignItems="center"
                     >
-                        <FormControl className={classes.margin}>
+                        <div className={classes.margin}>
                             <TextField
+                                fullWidth
                                 className={classes.textField}
                                 id="input-with-icon-textfield"
                                 label="username"
@@ -127,15 +138,18 @@ class Login extends Component {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <Avatar
-                                                alt="Adelle Charles"
+                                                alt="user"
                                                 src="/assets/loginuser.svg"
                                                 className={ classes.bigAvatar1}
                                             />
                                         </InputAdornment>
                                     ),
                                 }}
+                                name="company_email"
+                                onChange={this.handleInputChange}
                             />
                             <TextField
+                                fullWidth
                                 className={classes.textField}
                                 id="input-with-icon-textfield"
                                 label="password"
@@ -144,35 +158,37 @@ class Login extends Component {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <Avatar
-                                                alt="Adelle Charles"
+                                                alt="lock"
                                                 src="/assets/lock.svg"
                                                 className={ classes.bigAvatar1}
                                             />
                                         </InputAdornment>
                                     ),
                                 }}
+                                name="company_password"
+                                onChange={this.handleInputChange}
                             />
-                        </FormControl>
+                        </div>
+                    </Grid>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="flex-end"
+                        alignItems="center"
+                        item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
+                        <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
+                            <Typography variant="button" gutterBottom className={classes.textTransform}>
+                                Forget password?
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={4} xl={12} >
+                            <Button type="submit" variant="contained"  className={classes.button}>
+                                Login
+                            </Button>
+                        </Grid>
                     </Grid>
                 </div>
-
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-end"
-                    alignItems="center"
-                    item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                    <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
-                        <Typography variant="button" gutterBottom className={classes.textTransform}>
-                            Forget password?
-                        </Typography>
-                    </Grid>
-                    <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
-                        <Button variant="contained"  className={classes.button}>
-                            Login
-                        </Button>
-                    </Grid>
-                </Grid>
+                </form>
             </div>
         );
     }

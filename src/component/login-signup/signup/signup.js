@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from "@material-ui/core/Button/Button";
 
 
@@ -74,6 +73,9 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
     },
+    formControl: {
+        padding: 5
+    }
 });
 
 class Signup extends Component {
@@ -82,22 +84,20 @@ class Signup extends Component {
         document.title = 'Monet | Sign up';
         this.state = {
             formData: {
-                company_name : {value: '', isValid: false},
-                company_admin_name : {value: '', isValid: false},
-                company_email : {value: '', isValid: false},
-                company_password : {value: '', isValid: false},
-                company_confirm_password : {value: '', isValid: false},
-                company_address : {value: '', isValid: false},
-                company_country : {value: '', isValid: false},
-                company_zipcode : {value: '', isValid: false}
+                company_name : {value: '', isValid: false, isUntouched: true},
+                company_admin_name : {value: '', isValid: false, isUntouched: true},
+                company_email : {value: '', isValid: false, isUntouched: true},
+                company_password : {value: '', isValid: false, isUntouched: true},
+                company_confirm_password : {value: '', isValid: false, isUntouched: true},
+                company_address : {value: '', isValid: false, isUntouched: true},
+                company_country : {value: '', isValid: false, isUntouched: true},
+                company_zipcode : {value: '', isValid: false, isUntouched: true}
             }
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleInputChange(event) {
-        event.persist();
-        console.log(event);
         const target = event.target;
         const name = target.name;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -113,15 +113,14 @@ class Signup extends Component {
         event.preventDefault();
     }
     static handleValidation(type, value) {
-        if (type === 'company_name' || type === 'company_admin_name' || type === 'company_address' || type === 'company_country') {
+        if (type === 'company_name' || type === 'company_admin_name' || type === 'company_address' || type === 'company_country')
             return value.length > 3 && !!value.match(/^[a-zA-Z ]*$/);
-        } else if (type === 'company_email') {
+        else if (type === 'company_email')
             return !!value.match(/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,3}$/);
-        } else if (type === 'company_password' || type === 'company_confirm_password') {
+        else if (type === 'company_password' || type === 'company_confirm_password')
             return !!value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&'])[^ ]{8,}$/);
-        } else if (type === 'company_zipcode') {
+        else if (type === 'company_zipcode')
             return (value.length >= 6 && !!value.match(/^[0-9]*$/));
-        }
     }
     render() {
         const { classes } = this.props;
@@ -142,40 +141,34 @@ class Signup extends Component {
                             alignItems="center"
                         >
                             <div className={classes.margin}>
-                                <FormControl className={classes.formControl} error={!formData.company_name.isValid} aria-describedby="company-name-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-name">Company Name</InputLabel>
-                                    <Input id="company-name" name="company_name" onChange={this.handleInputChange}/>
-                                    <FormHelperText id="company-name-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_name.isValid && !formData.company_name.isUntouched} aria-describedby="company-name-error-text" fullWidth>
+                                    <Input id="company-name" name="company_name" onChange={this.handleInputChange} placeholder="Company name" />
+                                    <FormHelperText id="company-name-error-text" style={{visibility: formData.company_name.isValid || formData.company_name.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
-                                <FormControl className={classes.formControl} error={!formData.company_admin_name.isValid} aria-describedby="company-admin-name-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-admin-name">Company admin name</InputLabel>
-                                    <Input id="company-admin-name" name="company_admin_name" onChange={this.handleInputChange} />
-                                    <FormHelperText id="company-admin-name-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_admin_name.isValid && !formData.company_admin_name.isUntouched} aria-describedby="company-admin-name-error-text" fullWidth>
+                                    <Input id="company-admin-name" name="company_admin_name" onChange={this.handleInputChange} placeholder="Company admin name" />
+                                    <FormHelperText id="company-admin-name-error-text" style={{visibility: formData.company_admin_name.isValid || formData.company_admin_name.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
-                                <FormControl className={classes.formControl} error={!formData.company_email.isValid} aria-describedby="company-email-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-email">Company email</InputLabel>
-                                    <Input id="company-email" name="company_email" onChange={this.handleInputChange} />
-                                    <FormHelperText id="company-email-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_email.isValid && !formData.company_email.isUntouched} aria-describedby="company-email-error-text" fullWidth>
+                                    <Input id="company-email" name="company_email" onChange={this.handleInputChange} placeholder="Company email" />
+                                    <FormHelperText id="company-email-error-text" style={{visibility: formData.company_email.isValid || formData.company_email.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
-                                <FormControl className={classes.formControl} error={!formData.company_password.isValid} aria-describedby="company-password-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-password">Company password</InputLabel>
-                                    <Input id="company-password" name="company_password" onChange={this.handleInputChange} />
-                                    <FormHelperText id="company-password-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_password.isValid && !formData.company_password.isUntouched} aria-describedby="company-password-error-text" fullWidth>
+                                    <Input id="company-password" name="company_password" onChange={this.handleInputChange} placeholder="Company Name" />
+                                    <FormHelperText id="company-password-error-text" style={{visibility: formData.company_password.isValid || formData.company_password.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
-                                <FormControl className={classes.formControl} error={!formData.company_confirm_password.isValid} aria-describedby="company-confirm-password-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-confirm-password">Company confirm password</InputLabel>
-                                    <Input id="company-confirm-password" name="company_confirm_password" onChange={this.handleInputChange} />
-                                    <FormHelperText id="company-confirm-password-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_confirm_password.isValid && !formData.company_confirm_password.isUntouched} aria-describedby="company-confirm-password-error-text" fullWidth>
+                                    <Input id="company-confirm-password" name="company_confirm_password" onChange={this.handleInputChange} placeholder="Company confirm password" />
+                                    <FormHelperText id="company-confirm-password-error-text" style={{visibility: formData.company_confirm_password.isValid || formData.company_confirm_password.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
-                                <FormControl className={classes.formControl} error={!formData.company_address.isValid} aria-describedby="company-address-error-text" fullWidth>
-                                    <InputLabel htmlFor="company-address">Company address</InputLabel>
-                                    <Input id="company-address" name="company_address" onChange={this.handleInputChange} />
-                                    <FormHelperText id="company-address-error-text">Error</FormHelperText>
+                                <FormControl className={classes.formControl} error={!formData.company_address.isValid && !formData.company_address.isUntouched} aria-describedby="company-address-error-text" fullWidth>
+                                    <Input id="company-address" name="company_address" onChange={this.handleInputChange} placeholder="Company address" />
+                                    <FormHelperText id="company-address-error-text" style={{visibility: formData.company_address.isValid || formData.company_address.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
                                 <Grid
                                     container
@@ -187,37 +180,35 @@ class Signup extends Component {
                                           direction="row"
                                           justify="flex-start"
                                           alignItems="center">
-                                        <FormControl className={classes.formControl} error={!formData.company_country.isValid} aria-describedby="company-country-error-text" fullWidth>
-                                            <InputLabel htmlFor="company-country">Company country</InputLabel>
-                                            <Input id="company-country" name="company_country" onChange={this.handleInputChange} />
-                                            <FormHelperText id="company-country-error-text">Error</FormHelperText>
+                                        <FormControl className={classes.formControl} error={!formData.company_country.isValid && !formData.company_country.isUntouched} aria-describedby="company-country-error-text" fullWidth>
+                                            <Input id="company-country" name="company_country" onChange={this.handleInputChange} placeholder="Company country" />
+                                            <FormHelperText id="company-country-error-text" style={{visibility: formData.company_country.isValid || formData.company_country.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                         </FormControl>
                                     </Grid>
                                     <Grid item lg={1}/>
                                     <Grid item lg={5}>
-                                        <FormControl className={classes.formControl} error={!formData.company_zipcode.isValid} aria-describedby="company-zipcode-error-text" fullWidth>
-                                            <InputLabel htmlFor="company-zipcode">Company country</InputLabel>
-                                            <Input id="company-zipcode" name="company_zipcode" onChange={this.handleInputChange} />
-                                            <FormHelperText id="company-zipcode-error-text">Error</FormHelperText>
+                                        <FormControl className={classes.formControl} error={!formData.company_zipcode.isValid && !formData.company_zipcode.isUntouched} aria-describedby="company-zipcode-error-text" fullWidth>
+                                            <Input id="company-zipcode" name="company_zipcode" onChange={this.handleInputChange} placeholder="Company zipcode" />
+                                            <FormHelperText id="company-zipcode-error-text" style={{visibility: formData.company_zipcode.isValid || formData.company_zipcode.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                         </FormControl>
                                     </Grid>
 
                                 </Grid>
                             </div>
                         </Grid>
-                    </div>
-                    <Grid
-                        container
-                        direction="row"
-                        justify="flex-end"
-                        alignItems="center"
-                        item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                        <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
-                            <Button type="submit" variant="contained"  className={classes.button} style={{visibility: isEnabled ? 'visible' : 'hidden'}}>
-                                Sign Up
-                            </Button>
+                        <Grid
+                            container
+                            direction="row"
+                            justify="flex-end"
+                            alignItems="center"
+                            item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
+                            <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
+                                <Button type="submit" variant="contained"  className={classes.button} style={{visibility: isEnabled ? 'visible' : 'hidden'}}>
+                                    Sign Up
+                                </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </div>
                 </form>
 
             </div>
