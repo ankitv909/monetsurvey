@@ -17,8 +17,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import {Link} from "react-router-dom";
 
-
-import { connect } from 'react-redux'
+/*import { connect } from 'react-redux'*/
 
 const styles = {
     root: {
@@ -44,7 +43,14 @@ const styles = {
         backgroundColor:"#ffff",
     },
     iconbutton:{
-        borderRadius:'0'
+        borderRadius:'0',
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+        '&:active': {
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+        },
     }
 };
 
@@ -84,8 +90,8 @@ class Header extends Component {
                                             <MenuIcon />
                                         </IconButton>
                                     </Hidden>
-                                    <Grid item xs={3} sm={2} md={2} lg={1} xl={1}>
-                                    <img src="/assets/monet_logo.svg" alt="logo" className="img-responsive"/>
+                                    <Grid item xs={4} sm={2} md={2} lg={1} xl={1}>
+                                        <img src="/assets/monet_logo.svg" alt="logo" className="img-responsive"/>
                                     </Grid>
                                     {auth && (
                                         <div className={classes.positionAbsolute}>
@@ -96,12 +102,17 @@ class Header extends Component {
                                                 onClick={this.handleMenu}
                                                 color="inherit"
                                             >
+                                                <Grid container
+                                                   direction="row"
+                                                   justify="flex-end"
+                                                   alignItems="center" >
                                                 <Grid item xs={2} sm={2} md={2} lg={2} xl={1}>
                                                     <img src="/assets/user1.svg" alt="logo" className="img-responsive"/>
                                                 </Grid>
                                                 <Typography variant="caption" align="left" className={classes.textTransform} gutterBottom>
                                                    Monet Networks<br/>Administrator
                                                 </Typography>
+                                                </Grid>
                                             </IconButton>
                                             <Menu
                                                 id="menu-appbar"
@@ -125,8 +136,8 @@ class Header extends Component {
                                                         label={auth ? 'Logout' : 'Login'}
                                                     />
                                                 </FormGroup>
-                                                <MenuItem component={Link} to="/login" onClick={this.handleClose}>Login</MenuItem>
-                                                <MenuItem component={Link} to="/signup" onClick={this.handleClose}>Signup</MenuItem>
+                                                <MenuItem component={Link} to="/loginsignupcontainer" onClick={this.handleClose}>Login</MenuItem>
+                                                <MenuItem component={Link} to="/loginsignupcontainer" onClick={this.handleClose}>Signup</MenuItem>
                                             </Menu>
                                         </div>
                                     )}

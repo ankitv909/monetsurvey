@@ -8,11 +8,10 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {Link} from "react-router-dom";
-import { Route } from 'react-router-dom'
-import Login from "./login/login";
-import Signup from "./signup/signup";
-
+import {Link, Redirect, Switch} from "react-router-dom";
+import Login from "../login-signup/login/login";
+import Signup from "../login-signup/signup/signup";
+import Route from "react-router-dom/es/Route";
 const styles = theme => ({
     card: {
         maxWidth:'100%',
@@ -45,11 +44,11 @@ const styles = theme => ({
     },
     positionAbsolute:{
         position:'absolute',
-            display: 'flex',
-            justifyContent: 'center',
+        display: 'flex',
+        justifyContent: 'center',
     },
     paddingTop:{
-      paddingTop: '2rem',
+        paddingTop: '2rem',
     }
 });
 
@@ -60,7 +59,6 @@ class LoginSignupContainer extends Component {
         this.state = {
             value: 0,
         };
-        console.log('in constructor', this.props.location.pathname);
         switch (this.props.location.pathname) {
             case '/login':
                 this.state = {value: 0};
@@ -107,23 +105,26 @@ class LoginSignupContainer extends Component {
                                   justify="center"
                                   alignItems="center"
                                   item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                            <Paper className={classes.root}>
-                                <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
-                                <Tabs
-                                    value={value}
-                                    onChange={this.handleChange}
-                                    indicatorColor="primary"
-                                    textColor="primary"
-                                    fullWidth
-                                >
-                                    <Tab className="login-shadow" label="Login" component={Link} to="/login" />
-                                    <Tab label="Sign Up" component={Link} to="/signup" />
-                                </Tabs>
-                                </Grid>
-                            </Paper>
+                                <Paper className={classes.root}>
+                                    <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
+                                        <Tabs
+                                            value={value}
+                                            onChange={this.handleChange}
+                                            indicatorColor="primary"
+                                            textColor="primary"
+                                            fullWidth
+                                        >
+                                            <Tab className="login-shadow" label="Login" component={Link} to="/login" />
+                                            <Tab label="Sign Up" component={Link} to="/signup" />
+                                        </Tabs>
+                                    </Grid>
+                                </Paper>
                             </Grid>
-                            <Route path={`${this.props.match.path}login`} component={Login} />
-                            <Route path={`${this.props.match.path}signup`} component={Signup} />
+                            <Switch>
+                                <Route exact path={`${this.props.match.path}login`} component={Login} />
+                                <Route path={`${this.props.match.path}signup`} component={Signup} />
+                                <Redirect to='/login' />
+                            </Switch>
                         </Card>
                     </Grid>
                 </Grid>

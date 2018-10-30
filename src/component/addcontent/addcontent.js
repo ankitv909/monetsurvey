@@ -99,7 +99,7 @@ class Addcontent extends Component {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12} sm={10} md={9} lg={8} xl={6} className={classes.paddingTop}>
+                    <Grid item xs={11} sm={10} md={9} lg={8} xl={6} className={classes.paddingTop}>
                         <Paper  elevation={1}>
                             <Paper className={classes.root1} >
                                 <Grid

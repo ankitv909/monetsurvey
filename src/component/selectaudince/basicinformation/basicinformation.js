@@ -187,7 +187,7 @@ class Basicinformation extends Component {
         const drawer = (
             <Grid container direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12}
                   xl={12}>
-                <Grid item xs={12} sm={12} md={12} lg={10} xl={12} >
+                <Grid item xs={12} sm={12} md={9} lg={10} xl={9} >
                     <Paper className={classes.shadownone}>
                         {/*  <div className={classes.toolbar} />*/}
                         <List >
@@ -234,7 +234,7 @@ class Basicinformation extends Component {
                             justify="center"
                             alignItems="center"
                             item xs={12} md={12} sm={12} lg={12} xl={12} className={classes.paddingTop}>
-                            <Grid item xs={5} md={6} sm={8} lg={6} xl={12}>
+                            <Grid item xs={5} md={6} sm={7} lg={6} xl={8}>
                                 <img src="/assets/0.svg" alt="80"/>
                             </Grid>
                         </Grid>
@@ -243,11 +243,11 @@ class Basicinformation extends Component {
             </Grid>
         );
 
-        return <div className="selectaudince">
+        return <div className="basicinformation">
 
             <Grid container direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12}
                   xl={12}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} sm={11} md={12} lg={12} xl={12}>
                     <div className={classes.root}>
                         <Hidden mdUp>
                             <Drawer
@@ -276,7 +276,7 @@ class Basicinformation extends Component {
                                 {drawer}
                             </Drawer>
                         </Hidden>
-                        <Grid item xs={12} sm={12} md={12} lg={9} xl={12} className={classes.content}>
+                        <Grid item xs={12} sm={12} md={8} lg={9} xl={10} className={classes.content}>
                             <Paper className={classes.content1} >
                                 {/*  <div className={classes.toolbar} />*/}
                                 <IconButton

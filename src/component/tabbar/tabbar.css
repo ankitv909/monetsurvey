@@ -1,8 +1,8 @@
 .tabbar {
     text-align: center;
 }
-.MuiTabScrollButton-root-205 {
-    flex: 0 0 145px !important;
+.MuiPrivateTabScrollButton-root-206,.MuiPrivateTabScrollButton-root-205 {
+    flex: 4 0 56px !important;
     color: inherit;
 }
 /*

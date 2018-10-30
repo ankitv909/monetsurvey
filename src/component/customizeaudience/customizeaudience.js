@@ -145,7 +145,7 @@ class Customizeaudience extends Component {
         const drawer = (
             <Grid container direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12}
                   xl={12}>
-                <Grid item xs={12} sm={12} md={12} lg={10} xl={12}>
+                <Grid item xs={12} sm={12} md={9} lg={10} xl={9}>
                     <Paper className={classes.shadownone}>
                         {/*  <div className={classes.toolbar} />*/}
                         <List >
@@ -204,7 +204,7 @@ class Customizeaudience extends Component {
 
             <Grid container direction="row" justify="center" alignItems="center" item xs={12} sm={12} md={12} lg={12}
                   xl={12}>
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <Grid item xs={12} sm={11} md={12} lg={12} xl={12}>
                     <div className={classes.root}>
                         <Hidden mdUp>
                             <Drawer
@@ -233,7 +233,7 @@ class Customizeaudience extends Component {
                                 {drawer}
                             </Drawer>
                         </Hidden>
-                        <Grid item xs={12} sm={12} md={12} lg={9} xl={12} className={classes.content}>
+                        <Grid item xs={12} sm={12} md={8} lg={9} xl={10} className={classes.content}>
                             <Paper  className={classes.content1}>
                                 {/*  <div className={classes.toolbar} />*/}
                                 <IconButton

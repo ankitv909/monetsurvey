@@ -147,7 +147,7 @@ class Addtext extends Component {
                         </Typography>
                     </Grid>
 
-                    <Grid item xs={12} sm={10} md={9} lg={8} xl={6} className={classes.paddingTop}>
+                    <Grid item xs={11} sm={10} md={9} lg={8} xl={6} className={classes.paddingTop}>
                         <Paper  elevation={1}>
 
                             <Paper className={classes.root1} >
@@ -197,7 +197,7 @@ class Addtext extends Component {
                                 direction="row"
                                 justify="flex-end"
                                 alignItems="center" item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTopbottom} spacing={24}>
-                                <Grid item xs={12} sm={12} md={12} lg={7} xl={12}>
+                                <Grid item xs={7} sm={7} md={7} lg={7} xl={8}>
                                     <Paper className={classes.root2}>
                                         <form className={classes.container} noValidate autoComplete="off">
                                             <Input
@@ -216,7 +216,7 @@ class Addtext extends Component {
                                     </Paper>
 
                                 </Grid>
-                                <Grid item xs={12} sm={12} md={12} lg={4} xl={12}>
+                                <Grid item xs={4} sm={4} md={4} lg={4} xl={3}>
                                         <input
                                             accept="text/plain/"
                                             className={classes.uplod}
