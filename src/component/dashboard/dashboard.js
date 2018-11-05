@@ -105,7 +105,7 @@ class Dashboard extends Component {
             response: [],
             campaignsSortCopy: [],
             campaignsSearchCopy: [],
-            searchParamter: ''
+            searchKey: ''
         };
         this.searchCampaignList = this.searchCampaignList.bind(this);
         switch (this.props.location.pathname) {
@@ -202,16 +202,16 @@ class Dashboard extends Component {
             )
     }
     searchCampaignList(event) {
-        const searchParamter = event.target.value;
+        const searchKey = event.target.value;
         this.setState({
-            searchParamter
+            searchKey
         });
     }
 
     render() {
         const { classes } = this.props;
         const { value } = this.state;
-        const { response,campaignsSortCopy, searchParamter } = this.state;
+        const { response,campaignsSortCopy, campaignsSearchCopy, searchKey } = this.state;
         return (
             <div className="dashboard">
                 <Grid
@@ -299,7 +299,7 @@ class Dashboard extends Component {
                             </Grid>*/}
                         </Tabs>
                     </AppBar>
-                    {campaignsSortCopy ? <All response= { response } searchParamter= { searchParamter } /> : null }
+                    {campaignsSortCopy || campaignsSearchCopy ? <All response= { response } searchKey= { searchKey } /> : null }
                    {/* <Switch>
                         <Route path={`${this.props.match.path}/all`} component={All}/>
                         <Route path={`${this.props.match.path}/processing`} component={Processing}/>

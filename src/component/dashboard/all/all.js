@@ -165,17 +165,49 @@ class All extends Component {
             response: Object.assign([], this.props.response),
             campaignsSortCopy: Object.assign([], this.props.response),
             campaignsSearchCopy: Object.assign([], this.props.response),
-            searchParamter: this.props.searchParamter,
+            searchKey: this.props.searchKey,
             pager: {},
             pagedItems: []
         };
-        console.log(this.props.searchParamter)
-        this.sortCampaignsList = this.sortCampaignsList.bind(this);
-        this.setPage = this.setPage.bind(this);
+        this.searchCampaignsList = this.searchCampaignsList.bind(this);
     }
 
     componentDidMount() {
         this.setPage(1);
+    }
+
+    componentWillReceiveProps(props) {
+        let { searchKey, response } = props;
+        this.searchCampaignsList(searchKey, response)
+    }
+
+    searchCampaignsList(searchKey, response) {
+        const campaignsSearchCopy = Object.assign([], response);
+        if (searchKey) {
+            response = campaignsSearchCopy
+                .filter(campaign => {
+                    if (campaign.cmp_name && campaign.cmp_name.toLowerCase().match(searchKey.toLowerCase())) {
+                        return campaign;
+                    } if (campaign.countries_name && campaign.countries_name.toLowerCase().match(searchKey.toLowerCase())) {
+                        return campaign;
+                    } else {
+                        return null
+                    }
+                });
+            this.setState({
+                response
+            });
+            setTimeout(() => {
+                this.setPage(1);
+            }, 200);
+        } else {
+            this.setState({
+                response: campaignsSearchCopy
+            });
+            setTimeout(() => {
+                this.setPage(1);
+            }, 200);
+        }
     }
 
     sortCampaignsList(filter, sortType) {
@@ -388,7 +420,7 @@ class All extends Component {
                               justify="flex-start"
                               alignItems="center" className={classes.autopadding1}>
                             <Typography variant="body2" gutterBottom style={{color:'#878787'}}>
-                                Showing {pager.startIndex + 1} to {pager.endIndex + 1} of {pager.totalItems} rows
+                                Showing {pager.totalItems !== 0 ? pager.startIndex + 1 : 0} to {pager.endIndex + 1} of {pager.totalItems} rows
                             </Typography>
                         </Grid>
                     </Grid>
