@@ -70,6 +70,11 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 2,
         marginBottom: theme.spacing.unit * 2,
     },
+    active: {
+        background:'linear-gradient(to right,#1838D6,#5C95E4)',
+        boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important',
+        color:'#ffffff !important'
+    },
     buttonprev: {
         margin: theme.spacing.unit,
         width: 'auto',
@@ -81,7 +86,12 @@ const styles = theme => ({
         textTransform:'none',
         minHeight: '30px',
         color: '#878787',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        '&:hover': {
+            background:'linear-gradient(to right,#1838D6,#5C95E4)',
+            boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+            color:'#ffff'
+        }
     },
     buttonnext: {
         margin: theme.spacing.unit,
@@ -94,7 +104,12 @@ const styles = theme => ({
         textTransform:'none',
         minHeight: '30px',
         color: '#878787',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        '&:hover': {
+            background:'linear-gradient(to right,#1838D6,#5C95E4)',
+            boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+            color:'#ffff'
+        }
     },
     buttonlast: {
         margin: theme.spacing.unit,
@@ -107,7 +122,12 @@ const styles = theme => ({
         textTransform:'none',
         minHeight: '30px',
         color: '#ffff',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        '&:hover': {
+            background:'linear-gradient(to right,#1838D6,#5C95E4)',
+            boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+            color:'#ffff'
+        }
     },
     buttonnumber: {
         margin: 2,
@@ -117,24 +137,16 @@ const styles = theme => ({
         backgroundColor:'#ffff',
         padding: '0',
         minWidth: '0',
-        boxShadow: 'none',
         borderRadius: '50%',
         color:'#878787',
-        '&:active': {
-            background:'linear-gradient(to right,#1838D6,#5C95E4)',
-            boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
-            color:'#ffff'
-
-        },
+        boxShadow: 'unset',
         '&:hover': {
             background:'linear-gradient(to right,#1838D6,#5C95E4)',
             boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
             color:'#ffff'
-
         },
-    },
+    }
 });
-
 
 class All extends Component {
     constructor(props) {
@@ -152,17 +164,23 @@ class All extends Component {
             ],
             response: Object.assign([], this.props.response),
             campaignsSortCopy: Object.assign([], this.props.response),
-            campaignsSearchCopy: Object.assign([], this.props.response)
+            campaignsSearchCopy: Object.assign([], this.props.response),
+            searchParamter: this.props.searchParamter,
+            pager: {},
+            pagedItems: []
         };
+        console.log(this.props.searchParamter)
         this.sortCampaignsList = this.sortCampaignsList.bind(this);
         this.setPage = this.setPage.bind(this);
     }
 
+    componentDidMount() {
+        this.setPage(1);
+    }
 
     sortCampaignsList(filter, sortType) {
         const availableSortType = [null, 'asc', 'desc'];
-        const { header } = this.state;
-        const { campaignsSortCopy } = this.state;
+        const { header, campaignsSortCopy } = this.state;
         let { response } = this.state;
         for (const key in header) {
             if (header.hasOwnProperty(key)) {
@@ -198,11 +216,6 @@ class All extends Component {
         });
         this.setPage(1);
     }
-    componentWillReceiveProps(props) {
-        this.setState({
-            response: this.props.response
-        })
-    }
 
     getPager(totalItems, currentPage = 1, pageSize = 5) {
         // calculate total pages
@@ -226,14 +239,11 @@ class All extends Component {
             }
         }
 
-        // calculate start and end item indexes
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
-        // create an array of pages to ng-repeat in the pager control
         const pages = _.range(startPage, endPage + 1);
 
-        // return object with all pager properties required by the view
         return {
             totalItems: totalItems,
             currentPage: currentPage,
@@ -256,15 +266,16 @@ class All extends Component {
         const pager = this.getPager(response.length, page, 5);
         // get current page of items
         const pagedItems = response.slice(pager.startIndex, pager.endIndex + 1);
-        console.log(pagedItems);
+        this.setState({
+            pager,
+            pagedItems
+        });
     }
-
-
 
     render() {
         const { classes } = this.props;
         const { header } = this.state;
-        const { response } = this.state;
+        const { pagedItems, pager } = this.state;
         return (
             <div className="all">
                 <Grid
@@ -288,7 +299,7 @@ class All extends Component {
                         </Grid>
                     )}
                 </Grid>
-                {response.map((header, number) =><Grid
+                {pagedItems.map((header, number) =><Grid
                     container
                     direction="row"
                     justify="flex-start"
@@ -307,7 +318,7 @@ class All extends Component {
                             {header.cmp_name ? header.cmp_name : '-'}
                         </Grid>
                         <Grid className={classes.paper1} item xs={2} lg={2} md={2} sm={2} xl={2}>
-                            {header.cmp_country ? header.cmp_country : '-'}
+                            {header.countries_name ? header.countries_name : '-'}
                         </Grid>
                         <Grid className={classes.paper1} item xs={2} lg={2} md={2} sm={2} xl={2}>
                             <span>0/{header.cmp_target ? header.cmp_target.complete : ''}</span><br/>
@@ -377,42 +388,31 @@ class All extends Component {
                               justify="flex-start"
                               alignItems="center" className={classes.autopadding1}>
                             <Typography variant="body2" gutterBottom style={{color:'#878787'}}>
-                                Showing 1 to 10 of 21 rows
+                                Showing {pager.startIndex + 1} to {pager.endIndex + 1} of {pager.totalItems} rows
                             </Typography>
                         </Grid>
                     </Grid>
                     <Grid  item xs={6} lg={6} md={6} sm={6} xl={6}>
-                        <Grid container
+                        {pager.pages && pager.pages.length ? <Grid container
                               direction="row"
                               justify="flex-end"
                               alignItems="center" className={classes.autopadding}>
-                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonprev}>
+                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonnext} onClick = {() => this.setPage(pager.currentPage - 1) } disabled={pager.currentPage === 1}>
                                 Prev
                             </Button>
 
-                            <Button variant="fab"  aria-label="Add" className={classes.buttonnumber}>
-                                1
-                            </Button>
+                            {pager.pages.map((header, number) =>
+                                <Button variant="fab"  aria-label="Add" className={`${classes.buttonnumber} ` + (pager.currentPage === header ? classes.active : '')} key={number} onClick = {() => this.setPage(header) }>{header}</Button>
+                            )}
 
-                            <Button variant="fab"  aria-label="Add" className={classes.buttonnumber}>
-                                2
-                            </Button>
-
-                            <Button variant="fab"  aria-label="Add" className={classes.buttonnumber}>
-                                3
-                            </Button>
-
-                            <Button variant="fab"  aria-label="Add" className={classes.buttonnumber}>
-                                4
-                            </Button>
-
-                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonnext}>
+                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonnext} onClick = {() => this.setPage(pager.currentPage + 1) } disabled={pager.currentPage === pager.totalPages}>
                                 Next
                             </Button>
-                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonlast}>
+                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonnext} onClick = {() => this.setPage(pager.totalPages) } disabled={pager.currentPage === pager.totalPages}>
                                 Last
                             </Button>
                         </Grid>
+                            : null }
                     </Grid>
                 </Grid>
             </div>

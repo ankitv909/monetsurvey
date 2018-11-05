@@ -57,8 +57,7 @@ const styles = theme => ({
     },
     tabSelected: {},
     textField: {
-        margin: theme.spacing.unit *3,
-        marginTop:'0',
+        margin:'0 0 24px 0',
         width: 280,
     },
     searchIcon: {
@@ -72,7 +71,7 @@ const styles = theme => ({
         color: '#CEC9DD',
     },
     button: {
-        margin: theme.spacing.unit *3,
+        margin: '0 0 24px 0',
         backgroundColor:'transparent',
         boxShadow:'none',
         color:'#878787',
@@ -102,9 +101,11 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             value: 0,
+            countries: [],
             response: [],
             campaignsSortCopy: [],
-            searchParamter: null
+            campaignsSearchCopy: [],
+            searchParamter: ''
         };
         this.searchCampaignList = this.searchCampaignList.bind(this);
         switch (this.props.location.pathname) {
@@ -127,6 +128,23 @@ class Dashboard extends Component {
                 this.state = {value: 0};
                 break;
         }
+        fetch("https://dev.monetrewards.com/Diy/public/api/getCountry",
+            {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        countries: Object.assign([], result.response)
+                    });
+                },
+                (error) => {}
+            )
     }
     handleChange = (event, value) => {
         this.setState({ value });
@@ -139,7 +157,7 @@ class Dashboard extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer 1rzRY0mao4swVsvX6Q019ypzmnHT79eawrNf898Jti2ubr3OLNsiDSGwLLzB',
-                    'sid': '5bdfe0f3d1e1b7608b3dcf13'
+                    'sid': '5bdffbb7d1e1b76ef461a162'
                 },
             })
             .then(res => res.json())
@@ -157,6 +175,23 @@ class Dashboard extends Component {
                         }
                         return value;
                     });
+                    const { countries } = this.state;
+                    if (countries) {
+                        for (const key in countries) {
+                            if (countries.hasOwnProperty(key)) {
+                                for (const count in result.response) {
+                                    if (result.response.hasOwnProperty(count)) {
+                                        if (countries[key].countries_id === result.response[count].cmp_country) {
+                                            result.response[count].countries_name = countries[key].countries_name;
+                                        }
+                                        if (result.response[count].cmp_country === 0) {
+                                            result.response[count].countries_name = '';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     this.setState({
                         response: Object.assign([], result.response),
                         campaignsSortCopy: Object.assign([], result.response),
@@ -168,30 +203,15 @@ class Dashboard extends Component {
     }
     searchCampaignList(event) {
         const searchParamter = event.target.value;
-        if (searchParamter) {
-            const { campaignsSearchCopy } = this.state;
-            let { response } = this.state;
-            const campaignsSearchCopy1 = Object.assign([], campaignsSearchCopy);
-            response = campaignsSearchCopy1
-                .filter(campaign => {
-                    if (campaign.cmp_name && campaign.cmp_name.toLowerCase().match(searchParamter.toLowerCase())) {
-                        return campaign;
-                    } if (campaign.countries_name && campaign.countries_name.toLowerCase().match(searchParamter.toLowerCase())) {
-                        return campaign;
-                    }
-                    return campaign
-                });
-            this.setState({
-                response
-            })
-        }
+        this.setState({
+            searchParamter
+        });
     }
 
     render() {
         const { classes } = this.props;
         const { value } = this.state;
         const { response,campaignsSortCopy, searchParamter } = this.state;
-
         return (
             <div className="dashboard">
                 <Grid
@@ -202,7 +222,7 @@ class Dashboard extends Component {
                     item xs={12} lg={12} md={12} sm={12} xl={12}
                 >
                     <Grid
-                        item xs={11} lg={11} md={11} sm={11} xl={11}
+                        item xs={11} lg={11} md={11} sm={11} xl={9}
                     >
                 <Grid
                     container
@@ -279,7 +299,7 @@ class Dashboard extends Component {
                             </Grid>*/}
                         </Tabs>
                     </AppBar>
-                    {campaignsSortCopy ? <All response= {response} searchParamter= {searchParamter} /> : null }
+                    {campaignsSortCopy ? <All response= { response } searchParamter= { searchParamter } /> : null }
                    {/* <Switch>
                         <Route path={`${this.props.match.path}/all`} component={All}/>
                         <Route path={`${this.props.match.path}/processing`} component={Processing}/>
