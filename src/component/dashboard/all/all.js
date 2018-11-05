@@ -70,7 +70,7 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 2,
         marginBottom: theme.spacing.unit * 2,
     },
-    button1: {
+    buttonprev: {
         margin: theme.spacing.unit,
         width: 'auto',
         height: 'auto',
@@ -80,7 +80,21 @@ const styles = theme => ({
         backgroundColor:'#ffff',
         textTransform:'none',
         minHeight: '30px',
-        color: '#878787'
+        color: '#878787',
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
+    },
+    buttonnext: {
+        margin: theme.spacing.unit,
+        width: 'auto',
+        height: 'auto',
+        padding: '0 24px',
+        minWidth: '48px',
+        borderRadius: '24px',
+        backgroundColor:'#ffff',
+        textTransform:'none',
+        minHeight: '30px',
+        color: '#878787',
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
     },
     buttonlast: {
         margin: theme.spacing.unit,
@@ -93,9 +107,10 @@ const styles = theme => ({
         textTransform:'none',
         minHeight: '30px',
         color: '#ffff',
+        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)'
     },
     buttonnumber: {
-        margin: theme.spacing.unit,
+        margin: 2,
         width: '30px',
         height: '20px',
         minHeight:'30px',
@@ -130,8 +145,8 @@ class All extends Component {
                 {name: '', key: '', sort: null},
                 {name: 'Campaigns', key: 'cmp_name', sort: null},
                 {name: 'Test Market', key: 'countries_name', sort: null},
-                {name: 'Progress', key: '', sort: null},
-                {name: 'Pending', key: 'cmp_target', sort: null},
+                {name: 'Progress', key: 'cmp_target', sort: null},
+                {name: '', key: '', sort: null},/*Pending*/
                 {name: 'Status', key: '', sort: null},
                 {name: '', key: '', sort: null},
             ],
@@ -295,11 +310,11 @@ class All extends Component {
                             {header.cmp_country ? header.cmp_country : '-'}
                         </Grid>
                         <Grid className={classes.paper1} item xs={2} lg={2} md={2} sm={2} xl={2}>
-                            <span>{header.pagestage ? header.pagestage : ''}/7</span><br/>
+                            <span>0/{header.cmp_target ? header.cmp_target.complete : ''}</span><br/>
                             <span>completed</span>
                         </Grid>
                         <Grid className={classes.paper1} item xs={1} lg={1} md={1} sm={1} xl={1}>
-                            {header.cmp_target ? header.cmp_target.complete : ''}
+                           {/* {header.cmp_target ? header.cmp_target.complete : ''}*/}
                         </Grid>
                         <Grid className={classes.paper1} item xs={2} lg={2} md={2} sm={2} xl={2}>
                             <svg height="20" width="20" style={{ verticalAlign: 'middle'}}>
@@ -370,8 +385,8 @@ class All extends Component {
                         <Grid container
                               direction="row"
                               justify="flex-end"
-                              alignItems="center" className={classes.autopadding2}>
-                            <Button variant="extendedFab" aria-label="Delete" className={classes.button1}>
+                              alignItems="center" className={classes.autopadding}>
+                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonprev}>
                                 Prev
                             </Button>
 
@@ -391,7 +406,7 @@ class All extends Component {
                                 4
                             </Button>
 
-                            <Button variant="extendedFab" aria-label="Delete" className={classes.button1}>
+                            <Button variant="extendedFab" aria-label="Delete" className={classes.buttonnext}>
                                 Next
                             </Button>
                             <Button variant="extendedFab" aria-label="Delete" className={classes.buttonlast}>
