@@ -66,9 +66,10 @@ export default App;
 import React, { Component } from "react";
 import './App.css';
 import 'typeface-roboto';
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route,} from 'react-router-dom'
 import Header from "./component/header/header";
 import LoginSignupContainer from "./component/login-signup/login-signup-container";
+import Dashboard from "./component/dashboard/dashboard"
 /*import Addimage from "./component/addcontent/addimage/addimage";
 import Addtext from "./component/addcontent/addtext/addtext";*/
 
@@ -82,11 +83,11 @@ class App extends Component {
                 <div >
                     <Header/>
                     <Switch>
+                        <Route exact path="/dashboard" component={Dashboard} />
                         <Route path="/corporate" component={Tabbar} />
+                        <Route path="/dashboard" component={Dashboard} />
                         <Route path="/" component={LoginSignupContainer} />
-                        {/*<Route path="/addimage" component={Addimage} />
-                        <Route path="/addtext" component={Addtext} />*/}
-                        <Redirect to='/login'/>
+                        {/*<Redirect to='/login'/>*/}
                     </Switch>
                 </div>
             </Router>

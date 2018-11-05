@@ -8,7 +8,7 @@ import Avatar from "@material-ui/core/Avatar/Avatar";
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {Link, Redirect, Switch} from "react-router-dom";
+import {Link, Switch} from "react-router-dom";   /*, Redirect*/
 import Login from "../login-signup/login/login";
 import Signup from "../login-signup/signup/signup";
 import Route from "react-router-dom/es/Route";
@@ -121,9 +121,9 @@ class LoginSignupContainer extends Component {
                                 </Paper>
                             </Grid>
                             <Switch>
-                                <Route exact path={`${this.props.match.path}login`} component={Login} />
+                                <Route  path={`${this.props.match.path}login`} component={Login} />
                                 <Route path={`${this.props.match.path}signup`} component={Signup} />
-                                <Redirect to='/login' />
+                               {/* <Redirect to='/login' />*/}
                             </Switch>
                         </Card>
                     </Grid>
