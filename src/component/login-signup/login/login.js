@@ -27,7 +27,7 @@ const styles = theme => ({
     card: {
         maxWidth:'100%',
         justifyContent:'center',
-
+        boxShadow: '1px 1px 20px rgba(0, 0, 0, 0.16)'
     },
     row: {
         display: 'flex',
@@ -199,13 +199,13 @@ class Login extends Component {
                         justify="flex-end"
                         alignItems="center"
                         item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                        <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
+                        <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
                             <Typography variant="button" gutterBottom className={classes.textTransform}>
                                 Forget password?
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={4} xl={12} >
-                            <Button type="submit" variant="contained"  className={classes.button} style={{visibility: isEnabled ? 'visible' : 'hidden'}}>
+                        <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
+                            <Button type="submit" variant="contained"  className={classes.button} disabled={isEnabled}> {/*style={{visibility: isEnabled ? 'visible' : 'hidden'}}*/}
                                 Login
                             </Button>
                         </Grid>

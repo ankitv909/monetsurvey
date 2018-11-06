@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import './login-signup-container.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Avatar from "@material-ui/core/Avatar/Avatar";
-import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {Link, Switch} from "react-router-dom";   /*, Redirect*/
+import {Link, Redirect, Switch} from "react-router-dom";   /*, Redirect*/
 import Login from "../login-signup/login/login";
 import Signup from "../login-signup/signup/signup";
 import Route from "react-router-dom/es/Route";
@@ -16,7 +14,7 @@ const styles = theme => ({
     card: {
         maxWidth:'100%',
         justifyContent:'center',
-
+        boxShadow: '1px 1px 20px rgba(0, 0, 0, 0.16)'
     },
     row: {
         display: 'flex',
@@ -85,8 +83,8 @@ class LoginSignupContainer extends Component {
                       justify="center"
                       alignItems="center"
                 >
-                    <Grid item xs={8} sm={6} md={5} lg={5} xl={3} style={{marginTop: 100,marginBottom:'4rem'}}>
-                        <Card className={classes.card}>
+                    <Grid item xs={8} sm={6} md={5} lg={5} xl={4} style={{marginTop: 100,marginBottom:'4rem'}}>
+                        <div className={classes.card}>
                             <Grid container
                                   direction="row"
                                   justify="center"
@@ -105,7 +103,7 @@ class LoginSignupContainer extends Component {
                                   justify="center"
                                   alignItems="center"
                                   item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                                <Paper className={classes.root}>
+                                <div className={classes.root}>
                                     <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
                                         <Tabs
                                             value={value}
@@ -118,14 +116,14 @@ class LoginSignupContainer extends Component {
                                             <Tab label="Sign Up" component={Link} to="/signup" />
                                         </Tabs>
                                     </Grid>
-                                </Paper>
+                                </div>
                             </Grid>
                             <Switch>
                                 <Route  path={`${this.props.match.path}login`} component={Login} />
                                 <Route path={`${this.props.match.path}signup`} component={Signup} />
-                               {/* <Redirect to='/login' />*/}
+                                <Redirect to='/login' />
                             </Switch>
-                        </Card>
+                        </div>
                     </Grid>
                 </Grid>
 
