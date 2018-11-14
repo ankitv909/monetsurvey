@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, { Component } from "react";
 import './addcontent.css';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
@@ -78,6 +78,35 @@ const styles = theme => ({
             borderBottomColor: "#ffff !important",
         }
     },
+    thumb: {
+        display: 'inline-flex',
+        borderRadius: 2,
+        border: '1px solid #eaeaea',
+        marginBottom: 8,
+        marginRight: 8,
+        width: 100,
+        height: 100,
+        padding: 4,
+        boxSizing: 'border-box'
+    },
+    thumbInner: {
+        display: 'flex',
+        minWidth: 0,
+        overflow: 'hidden'
+    },
+    imgAvatar: {
+        display: 'block',
+        width: 'auto',
+        height: '100%'
+    },
+    materialIconsCustom: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '150px',
+    }
 });
 
 
@@ -89,18 +118,39 @@ class Addcontent extends Component {
         };
     }
     onPreviewDrop = (files) => {
-        console.log(files);
         this.setState({
-            files: this.state.files.concat(files),
+            files: files.map(file => ({
+                ...file,
+                preview: URL.createObjectURL(file)
+            }))
         });
+    };
+
+    componentWillUnmount() {
+        // Make sure to revoke the data uris to avoid memory leaks
+        const {files} = this.state;
+        if (files > 0) {
+            for (let i = files.length; i >= 0; i--) {
+                const file = files[0];
+                URL.revokeObjectURL(file.preview);
+            }
+        }
     }
     render() {
-        const previewStyle = {
-            display: 'inline',
-            width: 100,
-            height: 100,
-        };
         const { classes } = this.props;
+        const {files} = this.state;
+
+        const thumbs = files.map((file, index) => (
+            <div className={classes.thumb} key={index}>
+                <div className={classes.thumbInner}>
+                    <img
+                        alt={index}
+                        src={file.preview}
+                        className={classes.imgAvatar}
+                    />
+                </div>
+            </div>
+        ));
         return (
             <div className="addcontent">
                 <Grid
@@ -168,16 +218,7 @@ class Addcontent extends Component {
                                 direction="row"
                                 justify="center"
                                 alignItems="center">
-                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                               {/* <input
-                                    accept="video/mp4/"
-                                    className={classes.uplod}
-                                    id="contained-button-file"
-                                    multiple
-                                    type="file"
-                                    disabled
-                                />*/}
-                               {/* <label htmlFor="contained-button-file">*/}
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                                     <Button variant="contained" component="span" className={classes.button}>
                                         <Grid
                                             container
@@ -189,28 +230,13 @@ class Addcontent extends Component {
                                                     accept="image/*"
                                                     onDrop={this.onPreviewDrop}
                                                 >
-                                                    Drop an image, get a preview!
+                                                    <i className={`${classes.materialIconsCustom} ${'material-icons'}`}>add</i>
                                                 </ReactDropzone>
-
-                                                {/* <img src="/assets/add.svg" alt="img" className={classes.img}/>*/}
                                             </Grid>
                                         </Grid>
                                     </Button>
-                              {/*  </label>*/}
-                                {this.state.files.length > 0 &&
-                                <Fragment>
-                                    <h3>Previews</h3>
-                                    {this.state.files.map((file,index) => (
-                                        <img
-                                            alt="Preview"
-                                            key={index}
-                                            src={file.preview}
-                                            style={previewStyle}
-                                        />
-                                    ))}
-                                </Fragment>
-                                }
-                            </Grid>
+                                    {thumbs}
+                                </Grid>
                             </Grid>
                         </Paper>
                     </Grid>
