@@ -15,6 +15,9 @@ import Addcontent from '../addcontent/addcontent';
 import Presurvey from '../presurvey/presurvey';
 import Postsurvey from '../postsurvey/postsurvey';
 import Review from "../review/review";
+import Audiencerange from "../selectaudince/audiencerange/audiencerange";
+import Targetaudience from "../selectaudince/targetaudince/targetaudince";
+import Selectaudience from "../selectaudince/selectaudince";
 
 function TabContainer(props) {
     return (
@@ -33,6 +36,7 @@ const styles = theme => ({
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
+        boxShadow:'2px 2px 2px rgba(0, 0, 0, 0.16)'
     },
     textTransform :{
         textTransform: "none",
@@ -120,6 +124,9 @@ class Tabbar extends Component {
                         <Route path={`${this.props.match.path}/presurvey`} component={Presurvey}/>
                         <Route path={`${this.props.match.path}/postsurvey`} component={Postsurvey}/>
                         <Route path={`${this.props.match.path}/review`} component={Review}/>
+                        <Route path={`${this.props.match.path}/audiencerange`} component={Audiencerange} />
+                        <Route path={`${this.props.match.path}/targetaudience`} component={Targetaudience} />
+                        <Route path={`${this.props.match.path}/audienceinput`} component={Selectaudience} />
                         <Redirect to='/corporate/addcontent' />
                     </Switch>
                 </Grid>

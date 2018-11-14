@@ -72,6 +72,7 @@ import LoginSignupContainer from "./component/login-signup/login-signup-containe
 import Dashboard from "./component/dashboard/dashboard"
 /*import Addimage from "./component/addcontent/addimage/addimage";
 import Addtext from "./component/addcontent/addtext/addtext";*/
+/*import Audiencerange from "./component/selectaudince/basicinformation/basicinformation"*/
 
 import Tabbar from "./component/tabbar/tabbar";
 
@@ -83,7 +84,7 @@ class App extends Component {
                 <div >
                     <Header/>
                     <Switch>
-                        <Route exact path="/dashboard" component={Dashboard} />
+                        <Route path="/dashboard" component={Dashboard} />
                         <Route path="/corporate" component={Tabbar} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/" component={LoginSignupContainer} />

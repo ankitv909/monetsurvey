@@ -75,6 +75,10 @@ const styles = theme => ({
     },
     formControl: {
         padding: 5
+    },
+    signpadding:{
+        paddingTop: '0rem',
+        paddingBottom:'2rem'
     }
 });
 
@@ -157,7 +161,7 @@ class Signup extends Component {
                                 </FormControl>
 
                                 <FormControl className={classes.formControl} error={!formData.company_password.isValid && !formData.company_password.isUntouched} aria-describedby="company-password-error-text" fullWidth>
-                                    <Input id="company-password" name="company_password" onChange={this.handleInputChange} placeholder="Company Name" />
+                                    <Input id="company-password" name="company_password" onChange={this.handleInputChange} placeholder="Company Password" />
                                     <FormHelperText id="company-password-error-text" style={{visibility: formData.company_password.isValid || formData.company_password.isUntouched ? 'hidden' : 'visible'}}>Error</FormHelperText>
                                 </FormControl>
 
@@ -201,7 +205,7 @@ class Signup extends Component {
                             direction="row"
                             justify="flex-end"
                             alignItems="center"
-                            item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
+                            item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.signpadding}>
                             <Grid  item xs={12} sm={12} md={12} lg={4} xl={12} >
                                 <Button type="submit" variant="contained"  className={classes.button} style={{visibility: isEnabled ? 'visible' : 'hidden'}}>
                                     Sign Up

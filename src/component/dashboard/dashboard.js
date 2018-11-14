@@ -14,6 +14,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button/Button";
 import {Link} from "react-router-dom";
 import All from './all/all';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+
 
 function TabContainer(props) {
     return (
@@ -150,14 +152,14 @@ class Dashboard extends Component {
         this.setState({ value });
     };
     componentDidMount() {
-        fetch("https://dev.monetrewards.com/Diy/public/api/listCampaigns?from_date=2018-01-01%2000:00:00&to_date=2018-11-04%2003:12:52",
+        fetch("https://dev.monetrewards.com/Diy/public/api/listCampaigns?from_date=2018-01-01%2000:00:00&to_date=2018-11-13%2011:08:48",
             {
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 1rzRY0mao4swVsvX6Q019ypzmnHT79eawrNf898Jti2ubr3OLNsiDSGwLLzB',
-                    'sid': '5bdffbb7d1e1b76ef461a162'
+                    'Authorization': 'Bearer ivL31r8PrbzZSskZdurylQLF8LSCPlxyXluKSBqSQwTtG4Iminvz36FsYX4s',
+                    'sid': '5beba2cfd1e1b76ce075f832'
                 },
             })
             .then(res => res.json())
@@ -222,7 +224,7 @@ class Dashboard extends Component {
                     item xs={12} lg={12} md={12} sm={12} xl={12}
                 >
                     <Grid
-                        item xs={11} lg={11} md={11} sm={11} xl={9}
+                        item xs={12} lg={11} md={11} sm={11} xl={9}
                     >
                 <Grid
                     container
@@ -289,14 +291,18 @@ class Dashboard extends Component {
                                  to="/dashboard/completed"/>
                             <Tab label="Expired"  classes={{ root: classes.tabRoot, selected: classes.tabSelected }}  component={Link}
                                  to="/dashboard/expired"/>
-                           {/* <Grid
+                            <Grid
                                 container
                                 direction="row"
                                 justify="flex-end"
                                 alignItems="center"
                             >
-                                kkk
-                            </Grid>*/}
+                                <DateRangePicker>
+                                    <Button size="small">
+                                        click to open
+                                    </Button>
+                                </DateRangePicker>
+                            </Grid>
                         </Tabs>
                     </AppBar>
                     {campaignsSortCopy || campaignsSearchCopy ? <All response= { response } searchKey= { searchKey } /> : null }

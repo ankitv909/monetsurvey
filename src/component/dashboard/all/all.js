@@ -24,7 +24,7 @@ const styles = theme => ({
     },
     button: {
         margin: '4px',
-        minWidth: '30px',
+        minWidth: '20px',
         minHeight: '34px',
         padding:'2px 2px',
         backgroundColor:'transparent',
@@ -80,13 +80,13 @@ const styles = theme => ({
         width: 'auto',
         height: 'auto',
         padding: '0 24px',
-        minWidth: '48px',
+        minWidth: '78px',
         borderRadius: '24px',
         backgroundColor:'#ffff',
         textTransform:'none',
         minHeight: '30px',
         color: '#878787',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        boxShadow:' 3px 3px rgba(0, 0, 0, .16)',
         '&:hover': {
             background:'linear-gradient(to right,#1838D6,#5C95E4)',
             boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
@@ -98,13 +98,13 @@ const styles = theme => ({
         width: 'auto',
         height: 'auto',
         padding: '0 24px',
-        minWidth: '48px',
+        minWidth: '78px',
         borderRadius: '24px',
         backgroundColor:'#ffff',
         textTransform:'none',
         minHeight: '30px',
         color: '#878787',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        boxShadow:' 3px 3px rgba(0, 0, 0, .16)',
         '&:hover': {
             background:'linear-gradient(to right,#1838D6,#5C95E4)',
             boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
@@ -116,13 +116,13 @@ const styles = theme => ({
         width: 'auto',
         height: 'auto',
         padding: '0 24px',
-        minWidth: '48px',
+        minWidth: '78px',
         borderRadius: '24px',
         background:'linear-gradient(to right,#1838D6,#5C95E4)',
         textTransform:'none',
         minHeight: '30px',
         color: '#ffff',
-        boxShadow:'0 3px 3px rgba(0, 0, 0, .16)',
+        boxShadow:' 3px 3px rgba(0, 0, 0, .16)',
         '&:hover': {
             background:'linear-gradient(to right,#1838D6,#5C95E4)',
             boxShadow: '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
@@ -339,7 +339,7 @@ class All extends Component {
                     item xs={12} lg={12} md={12} sm={12} xl={12}
                     className={classes.shadow}
                     key={number.toString()}>
-                        <Grid className={classes.paper1} item xs={2} lg={2} md={2} sm={2} xl={2}>
+                        <Grid className={classes.paper1} item xs={1} lg={2} md={2} sm={2} xl={2}>
                             {header.content_type === 'video' ? <img src={'https://dev.monetrewards.com' + header.thumb_url} height="120px" width="100%" style={{padding: 0}} alt={header.cmp_name}/>
                             : header.content_type === 'youtube' ? <img src={ header.thumb_url} height="120px" width="100%" style={{padding: 0}} alt={header.cmp_name}/>
                                     : header.content_type === 'vimeo' ? <img src={ header.thumb_url} height="120px" width="100%" style={{padding: 0}} alt={header.cmp_name}/>
@@ -414,7 +414,7 @@ class All extends Component {
                       direction="row"
                       justify="center"
                       alignItems="center" item xs={12} lg={12} md={12} sm={12} xl={12} className={`${classes.automargin} ${classes.boxshadow}`}>
-                    <Grid  item xs={6} lg={6} md={6} sm={6} xl={6}>
+                    <Grid  item xs={6} lg={6} md={6} sm={4} xl={6}>
                         <Grid container
                               direction="row"
                               justify="flex-start"
@@ -424,7 +424,7 @@ class All extends Component {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid  item xs={6} lg={6} md={6} sm={6} xl={6}>
+                    <Grid  item xs={6} lg={6} md={6} sm={8} xl={6}>
                         {pager.pages && pager.pages.length ? <Grid container
                               direction="row"
                               justify="flex-end"

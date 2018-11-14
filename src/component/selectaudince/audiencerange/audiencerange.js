@@ -351,7 +351,7 @@ class Audiencerange extends Component {
                                 justify="flex-end"
                                 alignItems="flex-end"
                                item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                                    <Button type="submit" variant="contained" component={Link} to="/targetaudience"   className={classes.button1}>
+                                    <Button type="submit" variant="contained" component={Link} to="/corporate/targetaudience"   className={classes.button1}>
                                         Next
                                     </Button>
                             </Grid>

@@ -43,6 +43,7 @@ const styles = theme => ({
     bigAvatar1: {
         width: 20,
         height: 20,
+        borderRadius: '20%'
     },
     root: {
         flexGrow: 1,
@@ -75,11 +76,16 @@ const styles = theme => ({
         fontweight:'600'
     },
     textField: {
-        marginLeft: theme.spacing.unit,
+        marginLeft: theme.spacing.unit ,
         marginRight: theme.spacing.unit,
+        color:'#878787'
     },
     boxShadow:{
         boxShadow: '0px 1px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(50, 19, 19, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12)',
+    },
+    loginpadding:{
+            paddingTop: '0rem',
+        paddingBottom:'2rem'
     }
 });
 
@@ -198,7 +204,7 @@ class Login extends Component {
                         direction="row"
                         justify="flex-end"
                         alignItems="center"
-                        item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
+                        item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.loginpadding}>
                         <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
                             <Typography variant="button" gutterBottom className={classes.textTransform}>
                                 Forget password?

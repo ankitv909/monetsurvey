@@ -47,7 +47,36 @@ const styles = theme => ({
     },
     paddingTop:{
         paddingTop: '2rem',
-    }
+    },
+    autopadding: {
+        paddingRight:theme.spacing.unit * 0,
+        paddingLeft:theme.spacing.unit * 0
+    },
+    tabsRoot: {
+        borderBottom: '1px solid #e8e8e8',
+        width:'100%'
+    },
+    tabsIndicator: {
+        background: 'linear-gradient(to right,#1838D6,#5C95E4)',
+    },
+    tabRoot: {
+        textTransform: 'initial',
+        minWidth: 72,
+        fontWeight: theme.typography.fontWeightRegular,
+        marginRight: theme.spacing.unit * 4,
+        '&:hover': {
+            color: '#878787',
+            opacity: 1,
+        },
+        '&$tabSelected': {
+            color: '#878787',
+            fontWeight: theme.typography.fontWeightMedium,
+        },
+        '&:focus': {
+            color: '#878787',
+        },
+    },
+    tabSelected: {},
 });
 
 class LoginSignupContainer extends Component {
@@ -104,16 +133,14 @@ class LoginSignupContainer extends Component {
                                   alignItems="center"
                                   item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
                                 <div className={classes.root}>
-                                    <Grid container item xs={12} sm={10} md={8} lg={8} xl={12}>
+                                    <Grid container item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.autopadding}>
                                         <Tabs
                                             value={value}
                                             onChange={this.handleChange}
-                                            indicatorColor="primary"
-                                            textColor="primary"
-                                            fullWidth
+                                            classes={{ root: classes.tabsRoot, indicator: classes.tabsIndicator }}
                                         >
-                                            <Tab className="login-shadow" label="Login" component={Link} to="/login" />
-                                            <Tab label="Sign Up" component={Link} to="/signup" />
+                                            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label="Login" component={Link} to="/login" />
+                                            <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label="Sign Up" component={Link} to="/signup" />
                                         </Tabs>
                                     </Grid>
                                 </div>
