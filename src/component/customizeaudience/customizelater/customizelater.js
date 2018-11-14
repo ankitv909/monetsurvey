@@ -15,6 +15,7 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button/Button";
 import TextField from "@material-ui/core/TextField/TextField";
+import {Link} from "react-router-dom";
 
 const drawerWidth = 300;
 
@@ -303,7 +304,7 @@ class Customizelater extends Component {
                                 <Button type="submit" variant="contained"  className={classes.skipbutton}>
                                     Skip
                                 </Button>
-                                <Button type="submit" variant="contained" className={classes.button1}>
+                                <Button type="submit" variant="contained" component={Link} to="/corporate/presurvey"  className={classes.button1}>
                                     Next
                                 </Button>
                             </Grid>

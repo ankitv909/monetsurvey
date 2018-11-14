@@ -18,6 +18,10 @@ import Review from "../review/review";
 import Audiencerange from "../selectaudince/audiencerange/audiencerange";
 import Targetaudience from "../selectaudince/targetaudince/targetaudince";
 import Selectaudience from "../selectaudince/selectaudince";
+import Customizerange from "../customizeaudience/customizerange/customizerange";
+import Customizelater from "../customizeaudience/customizelater/customizelater";
+import Addimage from "../addcontent/addimage/addimage";
+import Addtext from "../addcontent/addtext/addtext";
 
 function TabContainer(props) {
     return (
@@ -58,7 +62,22 @@ class Tabbar extends Component {
             case '/corporate/addcontent':
                 this.state = {value: 0};
                 break;
+            case '/corporate/addimage':
+                this.state = {value: 0};
+                break;
+            case '/corporate/addtext':
+                this.state = {value: 0};
+                break;
             case '/corporate/basicinfo':
+                this.state = {value: 1};
+                break;
+            case '/corporate/audiencerange':
+                this.state = {value: 1};
+                break;
+            case '/corporate/targetaudience':
+                this.state = {value: 1};
+                break;
+            case '/corporate/selectaudience':
                 this.state = {value: 1};
                 break;
             case '/corporate/customizeaudience':
@@ -127,6 +146,10 @@ class Tabbar extends Component {
                         <Route path={`${this.props.match.path}/audiencerange`} component={Audiencerange} />
                         <Route path={`${this.props.match.path}/targetaudience`} component={Targetaudience} />
                         <Route path={`${this.props.match.path}/audienceinput`} component={Selectaudience} />
+                        <Route path={`${this.props.match.path}/customizerange`} component={Customizerange} />
+                        <Route path={`${this.props.match.path}/customizelater`} component={Customizelater} />
+                        <Route path={`${this.props.match.path}/addimage`} component={Addimage} />
+                        <Route path={`${this.props.match.path}/addtext`} component={Addtext} />
                         <Redirect to='/corporate/addcontent' />
                     </Switch>
                 </Grid>

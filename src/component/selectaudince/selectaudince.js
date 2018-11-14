@@ -18,6 +18,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import Avatar from "@material-ui/core/Avatar/Avatar";
+import {Link} from "react-router-dom";
 
 
 const drawerWidth = 300;
@@ -663,7 +664,7 @@ class Selectaudince extends Component {
                                 justify="flex-end"
                                 alignItems="flex-end"
                                 item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTop}>
-                                <Button type="submit" variant="contained"  className={classes.button1}>
+                                <Button type="submit" variant="contained" component={Link} to="/corporate/customizeaudience"  className={classes.button1}>
                                     Next
                                 </Button>
                             </Grid>

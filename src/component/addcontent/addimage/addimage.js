@@ -140,14 +140,14 @@ class Addimage extends Component {
                                           direction="row"
                                           justify="flex-end"
                                           alignItems="center" item xs={6} sm={4} md={3} lg={3} xl={6}>
-                                        <Button component={Link} to="/addcontent" className="minwidth">
+                                        <Button component={Link} to="/corporate/addcontent" className="minwidth">
                                             <img src="/assets/video.svg" alt="icon" className={classes.avatar} />
                                         </Button>
-                                        <Button component={Link} to="/addimage" className="minwidth">
+                                        <Button component={Link} to="/corporate/addimage" className="minwidth">
                                             <img src="/assets/image select.svg" alt="icon" className={classes.avatar} />
                                         </Button>
 
-                                        <Button component={Link} to="/addtext" className="minwidth">
+                                        <Button component={Link} to="/corporate/addtext" className="minwidth">
                                             <img src="/assets/text selected.svg" alt="icon" className={classes.avatar} />
                                         </Button>
 

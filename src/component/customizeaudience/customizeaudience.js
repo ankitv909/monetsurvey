@@ -278,7 +278,7 @@ class Customizeaudience extends Component {
                                 <Button type="submit" variant="contained"  className={classes.skipbutton}>
                                     Skip
                                 </Button>
-                                <Button type="submit" variant="contained" component={Link} to="/customizerange" className={classes.button1}>
+                                <Button type="submit" variant="contained" component={Link} to="/corporate/customizerange" className={classes.button1}>
                                     Next
                                 </Button>
                             </Grid>

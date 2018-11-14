@@ -501,7 +501,7 @@ class Customizerange extends Component {
                                 <Button type="submit" variant="contained"  className={classes.skipbutton}>
                                     Skip
                                 </Button>
-                                <Button type="submit" variant="contained" component={Link} to="/customizelater" className={classes.button1}>
+                                <Button type="submit" variant="contained" component={Link} to="/corporate/customizelater" className={classes.button1}>
                                     Next
                                 </Button>
                             </Grid>

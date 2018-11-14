@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, Fragment} from "react";
 import './addcontent.css';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
@@ -8,6 +8,8 @@ import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button/Button";
+import ReactDropzone from "react-dropzone";
+
 
 const styles = theme => ({
     container: {
@@ -80,11 +82,24 @@ const styles = theme => ({
 
 
 class Addcontent extends Component {
-    state = {
-        value: 0,
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            files: [],
+        };
+    }
+    onPreviewDrop = (files) => {
+        console.log(files);
+        this.setState({
+            files: this.state.files.concat(files),
+        });
+    }
     render() {
+        const previewStyle = {
+            display: 'inline',
+            width: 100,
+            height: 100,
+        };
         const { classes } = this.props;
         return (
             <div className="addcontent">
@@ -126,14 +141,14 @@ class Addcontent extends Component {
                                           direction="row"
                                           justify="flex-end"
                                           alignItems="center" item xs={6} sm={4} md={3} lg={3} xl={6}>
-                                        <Button component={Link} to="/addcontent" className="minwidth">
+                                        <Button component={Link} to="/corporate/addcontent" className="minwidth">
                                             <img src="/assets/video.svg" alt="icon" className={classes.avatar} />
                                         </Button>
-                                        <Button component={Link} to="/addimage" className="minwidth" >
+                                        <Button component={Link} to="/corporate/addimage" className="minwidth" >
                                             <img src="/assets/image select.svg" alt="icon" className={classes.avatar} />
                                         </Button>
 
-                                        <Button component={Link} to="/addtext" className="minwidth">
+                                        <Button component={Link} to="/corporate/addtext" className="minwidth">
                                             <img src="/assets/text selected.svg" alt="icon" className={classes.avatar} />
                                         </Button>
 
@@ -154,14 +169,15 @@ class Addcontent extends Component {
                                 justify="center"
                                 alignItems="center">
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                <input
+                               {/* <input
                                     accept="video/mp4/"
                                     className={classes.uplod}
                                     id="contained-button-file"
                                     multiple
                                     type="file"
-                                />
-                                <label htmlFor="contained-button-file">
+                                    disabled
+                                />*/}
+                               {/* <label htmlFor="contained-button-file">*/}
                                     <Button variant="contained" component="span" className={classes.button}>
                                         <Grid
                                             container
@@ -169,11 +185,31 @@ class Addcontent extends Component {
                                             justify="center"
                                             alignItems="center">
                                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                                                <img src="/assets/add.svg" alt="img" className={classes.img}/>
+                                                <ReactDropzone
+                                                    accept="image/*"
+                                                    onDrop={this.onPreviewDrop}
+                                                >
+                                                    Drop an image, get a preview!
+                                                </ReactDropzone>
+
+                                                {/* <img src="/assets/add.svg" alt="img" className={classes.img}/>*/}
                                             </Grid>
                                         </Grid>
                                     </Button>
-                                </label>
+                              {/*  </label>*/}
+                                {this.state.files.length > 0 &&
+                                <Fragment>
+                                    <h3>Previews</h3>
+                                    {this.state.files.map((file,index) => (
+                                        <img
+                                            alt="Preview"
+                                            key={index}
+                                            src={file.preview}
+                                            style={previewStyle}
+                                        />
+                                    ))}
+                                </Fragment>
+                                }
                             </Grid>
                             </Grid>
                         </Paper>
