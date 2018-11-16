@@ -63,8 +63,20 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
         padding: '10px 50px',
-        backgroundColor:'transparent',
+        backgroundColor:'transparent ',
         boxShadow: 'none',
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+        '&:active': {
+            boxShadow: 'none',
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+        },
+        '&:focus': {
+            boxShadow: 'none',
+            backgroundColor:'transparent'
+        },
     },
     bootstrapInput: {
         fontSize: 10,
@@ -84,8 +96,8 @@ const styles = theme => ({
         border: '1px solid #eaeaea',
         marginBottom: 8,
         marginRight: 8,
-        width: 100,
-        height: 100,
+        width: '18rem',
+        height: '10rem',
         padding: 4,
         boxSizing: 'border-box'
     },
@@ -96,8 +108,8 @@ const styles = theme => ({
     },
     imgAvatar: {
         display: 'block',
-        width: 'auto',
-        height: '100%'
+        width: '100%',
+        height: 'auto'
     },
     materialIconsCustom: {
         height: '100%',
@@ -106,6 +118,19 @@ const styles = theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '150px',
+    },
+    nextbutton: {
+        margin: theme.spacing.unit,
+        background: 'linear-gradient(270deg,#5C95E4 20%,#1838D6)',
+        borderRadius: '30px',
+        padding: '6px 40px',
+        color:'#ffff',
+        textTransform:'none',
+        /*marginTop:'0rem'*/
+    },
+    automarg:{
+        marginTop:theme.spacing.unit *2,
+        marginBottom:theme.spacing.unit *2,
     }
 });
 
@@ -115,9 +140,15 @@ class Addcontent extends Component {
         super(props);
         this.state = {
             files: [],
+            show: true,
+            isEnable: false,
         };
     }
     onPreviewDrop = (files) => {
+        if(files.length > 0 ){
+            // set the state of isEnable to be true to make the button to be enable
+            this.setState({isEnable : true})
+        }
         this.setState({
             files: files.map(file => ({
                 ...file,
@@ -125,6 +156,11 @@ class Addcontent extends Component {
             }))
         });
     };
+    show() {
+        this.setState({
+            show: !this.state.show
+        });
+    }
 
     componentWillUnmount() {
         // Make sure to revoke the data uris to avoid memory leaks
@@ -139,11 +175,19 @@ class Addcontent extends Component {
     render() {
         const { classes } = this.props;
         const {files} = this.state;
+        const show = {
+            display: this.state.show ? "block" : "none"
+        };
+
+        const hide = {
+            display: this.state.show ? "none" : "block"
+        }
 
         const thumbs = files.map((file, index) => (
             <div className={classes.thumb} key={index}>
                 <div className={classes.thumbInner}>
-                    <img
+                    <video
+                        controls={true}
                         alt={index}
                         src={file.preview}
                         className={classes.imgAvatar}
@@ -185,7 +229,7 @@ class Addcontent extends Component {
                                                 input: classes.bootstrapInput,
                                                 underline: classes.cssUnderline,
                                             }}
-                                        />
+                                            disabled = {this.state.isEnable}/>
                                     </Grid>
                                     <Grid container
                                           direction="row"
@@ -207,38 +251,59 @@ class Addcontent extends Component {
 
                             </Paper>
 
-                            <Typography variant="button" gutterBottom className={classes.autospace}>
+                            <Typography variant="button" gutterBottom className={classes.autospace} style={show}>
                                 OR
                             </Typography>
-                            <Typography variant="button" gutterBottom className={classes.color}>
+                            <Typography variant="button" gutterBottom className={classes.color} style={show}>
                                 Drag and Drop here
                             </Typography>
                             <Grid
                                 container
                                 direction="row"
                                 justify="center"
-                                alignItems="center">
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                                    <Button variant="contained" component="span" className={classes.button}>
+                                alignItems="center" item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                <Grid item xs={12} sm={12} md={12} lg={4} xl={12}>
+                                    <ReactDropzone
+                                        accept="video/*"
+                                        onDrop={this.onPreviewDrop}
+                                        onChange={this.show.bind(this)}
+                                        style={{width:'auto',height:'auto'}} >
+                                    <Button variant="contained" component="span" className={classes.button} style={show}>
                                         <Grid
                                             container
                                             direction="row"
                                             justify="center"
                                             alignItems="center">
                                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                                                <ReactDropzone
+                                                    <img src="/assets/move-arrows.svg" alt="img" className={classes.img} />
+                                                   {/* <i className={`${classes.materialIconsCustom} ${'material-icons'}`}>add</i>*/}
+                                               {/* <ReactDropzone
                                                     accept="image/*"
                                                     onDrop={this.onPreviewDrop}
                                                 >
                                                     <i className={`${classes.materialIconsCustom} ${'material-icons'}`}>add</i>
-                                                </ReactDropzone>
+                                                </ReactDropzone>*/}
+                                                {/*<img src="/assets/add.svg" alt="img" className={classes.img}/>*/}
                                             </Grid>
                                         </Grid>
                                     </Button>
-                                    {thumbs}
+                                    </ReactDropzone>
+                                    <Grid  item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.automarg} style={hide}>{thumbs}</Grid>
                                 </Grid>
                             </Grid>
                         </Paper>
+                        <Grid
+                            container
+                            direction="row"
+                            justify="flex-end"
+                            alignItems="center"
+                            item xs={12} sm={12} md={12} lg={12} xl={12} spacing={8}>
+                            <Grid item xs={12} sm={12} md={2} lg={2} xl={2} >
+                                <Button variant="contained"  className={classes.nextbutton}>
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
 

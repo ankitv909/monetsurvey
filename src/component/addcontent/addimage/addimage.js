@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import Button from "@material-ui/core/Button/Button";
 import {Link} from "react-router-dom";
+import ReactDropzone from "react-dropzone";
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -69,7 +70,7 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
-        padding: '10px 50px',
+        padding: '18px 50px',
         backgroundColor:'transparent',
         boxShadow: '0px 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 0px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 0px -2px rgba(0, 0, 0, 0.12)',
     },
@@ -89,17 +90,84 @@ const styles = theme => ({
             borderBottomColor: "#ffff !important",
         }
     },
+    thumb: {
+        display: 'inline-flex',
+        borderRadius: 2,
+        border: '1px solid #eaeaea',
+        marginBottom: 2,
+        marginRight: 0,
+        width: '9rem',
+        height: '6rem',
+        padding: 2,
+        boxSizing: 'border-box'
+    },
+    thumbInner: {
+        display: 'flex',
+        minWidth: 0,
+        overflow: 'hidden'
+    },
+    imgAvatar: {
+        display: 'block',
+        width: '100%',
+        height: 'auto'
+    },
+    materialIconsCustom: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '150px',
+    }
 
 });
 
 
 class Addimage extends Component {
-    state = {
-        value: 0,
+    constructor(props) {
+        super(props);
+        this.state = {
+            files: [],
+        };
+    }
+    onPreviewDrop = (files) => {
+        files.map(file => (
+            this.state.files.push({
+                ...file,
+                preview: URL.createObjectURL(file)
+            })
+        ));
+        this.setState({
+            files: this.state.files
+        })
+        console.log(this.state.files)
     };
+    componentWillUnmount() {
+        // Make sure to revoke the data uris to avoid memory leaks
+        const {files} = this.state;
+        if (files > 0) {
+            for (let i = files.length; i >= 0; i--) {
+                const file = files[0];
+                URL.revokeObjectURL(file.preview);
+            }
+        }
+    }
 
     render() {
         const { classes } = this.props;
+        const {files} = this.state;
+        /*{console.log(files)}*/
+        const thumbs = files.map((file, index) => (
+            <div className={classes.thumb} key={index}>
+                <div className={classes.thumbInner}>
+                    <img
+                        alt={index}
+                        src={file.preview}
+                        className={classes.imgAvatar}
+                    />
+                </div>
+            </div>
+        ));
         return (
             <div className="addimage">
                 <Grid
@@ -159,16 +227,13 @@ class Addimage extends Component {
                                 container
                                 direction="row"
                                 justify="center"
-                                alignItems="center">
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.paddingTopbottom}>
-                                    <input
-                                        accept="image/"
-                                        className={classes.uplod}
-                                        id="contained-button-file"
-                                        multiple
-                                        type="file"
-                                    />
-                                    <label htmlFor="contained-button-file">
+                                alignItems="center" item xs={12} sm={12} md={12} lg={12} xl={12}>
+                                {/*<Grid  item xs={12} sm={12} md={12} lg={2} xl={12} className={classes.paddingTopbottom}>{thumbs}</Grid>*/}
+                                <Grid item xs={12} sm={12} md={12} lg={2} xl={12} className={classes.paddingTopbottom}>
+                                    <ReactDropzone
+                                        accept="image/*"
+                                        onDrop={this.onPreviewDrop}
+                                        style={{width:'auto',height:'auto'}}>
                                         <Button variant="contained" component="span" className={classes.button}>
                                             <Grid
                                                 container
@@ -179,11 +244,13 @@ class Addimage extends Component {
                                             <Typography variant="button" gutterBottom className={classes.color}>
                                                Add
                                             </Typography>
-                                            <img src="/assets/add.svg" alt="img" className={classes.img}/>
+                                                        <img src="/assets/add.svg" alt="img" className={classes.img} />
+                                                        {/* <i className={`${classes.materialIconsCustom} ${'material-icons'}`}>add</i>*/}
                                                 </Grid>
                                             </Grid>
                                         </Button>
-                                    </label>
+                                    </ReactDropzone>
+                                    {thumbs}
                                 </Grid>
                             </Grid>
                         </Paper>

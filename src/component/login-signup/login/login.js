@@ -202,7 +202,7 @@ class Login extends Component {
                     <Grid
                         container
                         direction="row"
-                        justify="flex-start"
+                        justify="flex-end"
                         alignItems="center"
                         item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.loginpadding}>
                         <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
@@ -210,7 +210,6 @@ class Login extends Component {
                                 Forget password?
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={4} xl={4} ></Grid>
                         <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
                             <Button type="submit" variant="contained"  className={classes.button} disabled={!isEnabled}> {/*style={{visibility: isEnabled ? 'visible' : 'hidden'}}*/}
                                 Login

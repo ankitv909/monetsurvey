@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="5a4ded68-aecd-4117-9b7a-8e19a32f0ab5" name="Default" comment="pagination">
+=======
+    <list default="true" id="5a4ded68-aecd-4117-9b7a-8e19a32f0ab5" name="Default" comment="new">
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/addcontent/addcontent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/addcontent/addcontent.js" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/component/login-signup/login/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/login-signup/login/login.js" afterDir="false" />
+=======
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,12 +60,21 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+<<<<<<< Updated upstream
           <entry key="css" value="787" />
           <entry key="html" value="1" />
           <entry key="js" value="23804" />
           <entry key="json" value="3" />
           <entry key="php" value="5" />
           <entry key="txt" value="25" />
+=======
+          <entry key="css" value="788" />
+          <entry key="html" value="4" />
+          <entry key="js" value="26228" />
+          <entry key="json" value="3" />
+          <entry key="php" value="5" />
+          <entry key="txt" value="40" />
+>>>>>>> Stashed changes
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -68,9 +82,15 @@
           <entry key="CSS" value="787" />
           <entry key="HTML" value="1" />
           <entry key="JSON" value="3" />
+<<<<<<< Updated upstream
           <entry key="JavaScript" value="23804" />
           <entry key="PHP" value="5" />
           <entry key="PLAIN_TEXT" value="25" />
+=======
+          <entry key="JavaScript" value="26228" />
+          <entry key="PHP" value="5" />
+          <entry key="PLAIN_TEXT" value="40" />
+>>>>>>> Stashed changes
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -130,8 +150,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/addcontent/addcontent.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="173">
               <caret line="119" column="32" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
+=======
+            <state relative-caret-position="255">
+              <caret line="245" column="113" selection-start-line="245" selection-start-column="51" selection-end-line="245" selection-end-column="113" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="e#0#49#0" expanded="true" />
               </folding>
@@ -264,9 +289,15 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< Updated upstream
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
+=======
+    <option name="x" value="-6" />
+    <option name="width" value="1380" />
+    <option name="height" value="735" />
+>>>>>>> Stashed changes
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -310,8 +341,13 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< Updated upstream
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541400157192" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Nodejs/monet-api-1" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542198182335" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../testapp" />
+>>>>>>> Stashed changes
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -512,11 +548,18 @@
       <workItem from="1540871282530" duration="27468000" />
       <workItem from="1540906735003" duration="2416000" />
       <workItem from="1540914070574" duration="357000" />
+<<<<<<< Updated upstream
       <workItem from="1540915476983" duration="111044000" />
       <workItem from="1541398636013" duration="15472000" />
       <workItem from="1541418042838" duration="640000" />
       <workItem from="1541478096801" duration="4058000" />
       <workItem from="1542195473481" duration="2745000" />
+=======
+      <workItem from="1540915476983" duration="126096000" />
+      <workItem from="1541478468343" duration="12065000" />
+      <workItem from="1541782295450" duration="212000" />
+      <workItem from="1541783509972" duration="53292000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="push before routing">
       <created>1540490628324</created>
@@ -560,10 +603,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541480358865</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="new">
+      <created>1542195166044</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1542195166044</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="462623000" />
   </component>
   <component name="TodoView">
@@ -578,6 +629,12 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
+=======
+    <option name="totallyTimeSpent" value="520510000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22441365" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -647,10 +704,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="push before routing" />
     <MESSAGE value="push after routing" />
+<<<<<<< Updated upstream
     <MESSAGE value="pagination" />
     <MESSAGE value="searching" />
     <MESSAGE value="edit some css" />
     <option name="LAST_COMMIT_MESSAGE" value="edit some css" />
+=======
+    <MESSAGE value="push after routing1" />
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
+>>>>>>> Stashed changes
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -937,8 +1000,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/addcontent/addcontent.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="173">
           <caret line="119" column="32" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
+=======
+        <state relative-caret-position="255">
+          <caret line="245" column="113" selection-start-line="245" selection-start-column="51" selection-end-line="245" selection-end-column="113" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#49#0" expanded="true" />
           </folding>

@@ -152,14 +152,14 @@ class Dashboard extends Component {
         this.setState({ value });
     };
     componentDidMount() {
-        fetch("https://dev.monetrewards.com/Diy/public/api/listCampaigns?from_date=2018-01-01%2000:00:00&to_date=2018-11-13%2011:08:48",
+        fetch("https://dev.monetrewards.com/Diy/public/api/listCampaigns?from_date=2018-01-01%2000:00:00&to_date=2018-11-15%2010:23:53",
             {
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ivL31r8PrbzZSskZdurylQLF8LSCPlxyXluKSBqSQwTtG4Iminvz36FsYX4s',
-                    'sid': '5bebbde1d1e1b70d4e447792'
+                    'Authorization': 'Bearer GENwQteIiwrU8QKWXgDUfQXJlWbX1Z1SGp8eU9FuThPYYLPsMlKag177O2M2',
+                    'sid': '5bee4266d1e1b76e730106d2'
                 },
             })
             .then(res => res.json())

@@ -8,6 +8,8 @@ import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import Button from "@material-ui/core/Button/Button";
 import {Link} from "react-router-dom";
+import ReactDropzone from "react-dropzone";
+
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -119,21 +121,83 @@ const styles = theme => ({
             borderBottomColor: "#ffff !important",
         }
     },
+    thumb: {
+        display: 'inline-flex',
+        borderRadius: 2,
+        border: '1px solid #eaeaea',
+        marginBottom: 8,
+        marginRight: 8,
+        width: '12rem',
+        height: '10rem',
+        padding: 4,
+        boxSizing: 'border-box'
+    },
+    thumbInner: {
+        display: 'flex',
+        minWidth: 0,
+        overflow: 'hidden'
+    },
+    imgAvatar: {
+        display: 'block',
+        width: '100%',
+        height: 'auto'
+    },
+    materialIconsCustom: {
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '150px',
+    }
 });
 
 
 class Addtext extends Component {
     state = {
         multiline: '',
+        files: []
     };
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
         });
     };
+    onPreviewDrop = (files) => {
+        this.setState({
+            files: files.map(file => ({
+                ...file,
+                preview: URL.createObjectURL(file)
+            }))
+        });
+    };
+
+    componentWillUnmount() {
+        // Make sure to revoke the data uris to avoid memory leaks
+        const {files} = this.state;
+        if (files > 0) {
+            for (let i = files.length; i >= 0; i--) {
+                const file = files[0];
+                URL.revokeObjectURL(file.preview);
+            }
+        }
+    }
 
     render() {
         const { classes } = this.props;
+        const {files} = this.state;
+
+        const thumbs = files.map((file, index) => (
+            <div className={classes.thumb} key={index}>
+                <div className={classes.thumbInner}>
+                    <text
+                        alt={index}
+                        src={file.preview}
+                        className={classes.imgAvatar}
+                    />
+                </div>
+            </div>
+        ));
         return (
             <div className="addtext">
                 <Grid
@@ -217,14 +281,18 @@ class Addtext extends Component {
 
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={3}>
-                                        <input
+                                        {/*<input
                                             accept="text/plain/"
                                             className={classes.uplod}
                                             id="contained-button-file"
                                             multiple
                                             type="file"
-                                        />
-                                        <label htmlFor="contained-button-file">
+                                        />*/}
+                                        {/*<label htmlFor="contained-button-file">*/}
+                                            <ReactDropzone
+                                                accept="text/*"
+                                                onDrop={this.onPreviewDrop}
+                                                style={{width:'auto',height:'auto'}}>
                                             <Paper className={classes.root4}>
                                                 <Grid
                                                     container
@@ -241,9 +309,11 @@ class Addtext extends Component {
                                                     </Grid>
                                                 </Grid>
                                             </Paper>
-                                        </label>
+                                            </ReactDropzone>
+                                    {/*    </label>*/}
                                 </Grid>
                             </Grid>
+                            {thumbs}
                         </Paper>
                         <Grid
                             container
