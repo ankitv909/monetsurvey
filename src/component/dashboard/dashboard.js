@@ -158,8 +158,8 @@ class Dashboard extends Component {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer GENwQteIiwrU8QKWXgDUfQXJlWbX1Z1SGp8eU9FuThPYYLPsMlKag177O2M2',
-                    'sid': '5bee4266d1e1b76e730106d2'
+                    'Authorization': 'Bearer pAyRYlo7ToxJZi76Je9zUnv6sBDv4e8MfsqKQVrFufSF2g1J6tzjxVILRXRT',
+                    'sid': '5bf386c0d1e1b74fc07687c2'
                 },
             })
             .then(res => res.json())

@@ -21,7 +21,8 @@ import Button from "@material-ui/core/Button/Button";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 
 
-/*import { connect } from 'react-redux'*/
+import { connect } from 'react-redux'
+import {compose} from "redux";
 
 const styles = theme => ( {
     root: {
@@ -223,5 +224,7 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-
-export default withStyles(styles) (Header);
+export default compose(
+    withStyles(styles),
+    connect(),
+)(Header);

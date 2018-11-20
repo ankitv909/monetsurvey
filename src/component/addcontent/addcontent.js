@@ -9,6 +9,20 @@ import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button/Button";
 import ReactDropzone from "react-dropzone";
+import { findDOMNode } from 'react-dom'
+import screenfull from 'screenfull'
+import '../players/reset.css'
+import '../players/defaults.css'
+import '../players/range.css'
+import '../players/App.css'
+import ReactPlayer from '../players/ReactPlayer'
+/*import ReactPlayer from "react-player"*/
+
+/*const MULTIPLE_SOURCES = [
+    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4' },
+    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogv' },
+    { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm' }
+]*/
 
 
 const styles = theme => ({
@@ -131,7 +145,18 @@ const styles = theme => ({
     automarg:{
         marginTop:theme.spacing.unit *2,
         marginBottom:theme.spacing.unit *2,
-    }
+    },
+    /*inputfield:{
+        width:'100%',
+        outline:'none',
+        border: 'none',
+        color:'#D3D3D3',
+        '&:active': {
+            boxShadow: 'none',
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+        }
+    }*/
 });
 
 
@@ -142,7 +167,18 @@ class Addcontent extends Component {
             files: [],
             show: true,
             isEnable: false,
+            url: null,
+            playing: true,
+            volume: 0.8,
+            muted: false,
+            played: 0,
+            loaded: 0,
+            duration: 0,
+            playbackRate: 1.0,
+            loop: false,
+            showplayer:'',
         };
+        this.input = React.createRef();
     }
     onPreviewDrop = (files) => {
         if(files.length > 0 ){
@@ -172,7 +208,79 @@ class Addcontent extends Component {
             }
         }
     }
+    load = url => {
+        this.setState({
+            url,
+            played: 0,
+            loaded: 0
+        })
+    }
+    playPause = () => {
+        this.setState({ playing: !this.state.playing })
+    }
+    stop = () => {
+        this.setState({ url: null, playing: false })
+    }
+    toggleLoop = () => {
+        this.setState({ loop: !this.state.loop })
+    }
+    setVolume = e => {
+        this.setState({ volume: parseFloat(e.target.value) })
+    }
+    toggleMuted = () => {
+        this.setState({ muted: !this.state.muted })
+    }
+    setPlaybackRate = e => {
+        this.setState({ playbackRate: parseFloat(e.target.value) })
+    }
+    onPlay = () => {
+        console.log('onPlay')
+        this.setState({ playing: true })
+    }
+    onPause = () => {
+        console.log('onPause')
+        this.setState({ playing: false })
+    }
+    onSeekMouseDown = e => {
+        this.setState({ seeking: true })
+    }
+    onSeekChange = e => {
+        this.setState({ played: parseFloat(e.target.value) })
+    }
+    onSeekMouseUp = e => {
+        this.setState({ seeking: false })
+        this.player.seekTo(parseFloat(e.target.value))
+    }
+    onProgress = state => {
+        console.log('onProgress', state)
+        // We only want to update time slider if we are not currently seeking
+        if (!this.state.seeking) {
+            this.setState(state)
+        }
+    }
+    onEnded = () => {
+        console.log('onEnded')
+        this.setState({ playing: this.state.loop })
+    }
+    onDuration = (duration) => {
+        console.log('onDuration', duration)
+        this.setState({ duration })
+    }
+    onClickFullscreen = () => {
+        screenfull.request(findDOMNode(this.player))
+    }
+    renderLoadButton = (url, label) => {
+        return (
+            <button onClick={() => this.load(url)}>
+                {label}
+            </button>
+        )
+    }
+    ref = player => {
+        this.player = player
+    }
     render() {
+        const { url, volume, muted, loop, playbackRate, } = this.state
         const { classes } = this.props;
         const {files} = this.state;
         const show = {
@@ -218,9 +326,11 @@ class Addcontent extends Component {
                                     alignItems="center" item xs={12} sm={12} md={12} lg={12} xl={12} spacing={0}>
                                     <Grid item xs={6} sm={8} md={9} lg={9} xl={6}>
                                         <Input
+                                            onChange={() => this.setState({ url: this.urlInput.value })}
+                                            inputRef={input => { this.urlInput = input }}
                                             placeholder="https://www.youtube.com/watch?v=ojpn2L1jvKw"
                                             className={classes.input}
-                                            inputProps={{
+                                            inputprops={{
                                                 'aria-label': 'Description',
                                                 'type':'text',
                                             }}
@@ -289,6 +399,33 @@ class Addcontent extends Component {
                                     </Button>
                                     </ReactDropzone>
                                     <Grid  item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.automarg} style={hide}>{thumbs}</Grid>
+                                    <Grid  item xs={12} sm={12} md={12} lg={12} xl={12} className={classes.automarg} >
+                                        <div className='player-wrapper'>
+                                            <ReactPlayer
+                                                playsinline
+                                                controls
+                                                ref={this.ref}
+                                                className='react-player'
+                                                width='100%'
+                                                height='100%'
+                                                url={url}
+                                                loop={loop}
+                                                playbackRate={playbackRate}
+                                                volume={volume}
+                                                muted={muted}
+                                                onReady={() => console.log('onReady')}
+                                                onStart={() => console.log('onStart')}
+                                                onPlay={this.onPlay}
+                                                onPause={this.onPause}
+                                                onBuffer={() => console.log('onBuffer')}
+                                                onSeek={e => console.log('onSeek', e)}
+                                                onEnded={this.onEnded}
+                                                onError={e => console.log('onError', e)}
+                                                onProgress={this.onProgress}
+                                                onDuration={this.onDuration}
+                                            />
+                                        </div>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -306,6 +443,11 @@ class Addcontent extends Component {
                         </Grid>
                     </Grid>
                 </Grid>
+               {/* <section className='section'>
+
+                    <input onChange={() => this.setState({ url: this.urlInput.value })} ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
+                      <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
+                </section>*/}
 
             </div>
         );
